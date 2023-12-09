@@ -1,0 +1,239 @@
+:root {
+    --background-color: #f1f2f4;
+    --primary-color: #0851a3;
+    --footer-color: #18191C;
+    --text-color: #5e6670;
+    --white-color: #fff;
+    --header-height: 48px;
+    --navbar-height: 88px;
+    --header-with-search-height: calc(
+      var(--header-height) - var(--navbar-height)
+    );
+  }
+  
+  * {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  li {
+    list-style: none;
+  }
+  
+  .container {
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
+  
+  .footer {
+    background-color: var(--footer-color);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 425px;
+  }
+  
+  .header-frame {
+    width: 100%;
+    height: var(--header-height);
+    background-color: var(--background-color);
+    padding: 0 300px 0 300px;
+  }
+  
+  .logo {
+    height: 40px;
+  }
+  
+  .logobk {
+    display: flex;
+    justify-content: space-between;
+    width: 217px;
+    font-size: 32px;
+    color: var(--primary-color);
+  }
+  
+  .logo-header {
+    margin-top: 23px;
+  }
+  
+  .logo-icon {
+    height: 40px;
+    width: 40px;
+    margin: 2px;
+  }
+  
+  .text-logo {
+    width: 169px;
+    height: 40px;
+    line-height: 40px;
+  }
+  
+  .header-nav {
+    display: flex;
+    height: var(--navbar-height);
+    justify-content: space-around;
+    text-align: center;
+  }
+  
+  .nav-list {
+    margin: 4px 3px 0 0;
+    display: flex;
+    width: 447px;
+    height: 78px;
+  }
+  
+  .nav-item {
+    width: 100px;
+    background-color: var(--background-color);
+    text-align: center;
+    align-items: center;
+    display: flex;
+  }
+  
+  .text-nav-1 {
+    color: #0A65CC !important;
+  }
+  
+  .item-1 {
+    border-bottom: 2px solid #0A65CC;
+  }
+  
+  .item-2 {
+    margin: 0px 14px 0px 14px;
+    gap: 4px;
+  }
+  
+  .text-nav {
+    margin: 0 auto;
+    color: var(--text-color);
+  }
+  
+  .avt-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin: 23px 23px;
+  }
+  
+  .filter-frame {
+    background-color: var(--background-color);
+    height: 76px;
+  }
+  
+  .filter-frame {
+    background-color: var(--background-color);
+    height: 125px;
+  }
+  
+  .footer-top {
+    height: 384px;
+    display: flex;
+    justify-content: space-between;
+    padding: 100px 120px;
+  }
+  
+  .logo-footer {
+    color: var(--white-color) !important;
+    display: flex;
+  }
+  
+  .list-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 124px;
+    width: 312px;
+  }
+  
+  .footer-right {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .list-item-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 164px;
+    width: 200px;
+  }
+  
+  .title-footer {
+    color: var(--white-color);
+    font-size: 20px;
+  }
+  
+  .text-footer {
+    color: var(--text-color);
+    font-size: 16px;
+    padding: 4px 0;
+  }
+  
+  .text-footer-1 {
+    font-size: 18px;
+  }
+  
+  .phone-number {
+    font-size: 18px;
+    color: var(--white-color);
+  }
+  
+  .text-footer-2 {
+    font-size: 14px;
+  }
+  
+  .copy-right {
+    display: flex;
+    border-top: 1px solid var(--text-color);
+    height: 68px;
+    padding: 9px 120px;
+    justify-content: space-between;
+  }
+  
+  .copy-text {
+    display: block;
+    visibility: visible;
+    color: var(--text-color);
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+  }
+  
+  .social {
+    display: flex;
+    height: 20px;
+    width: 130px;
+    justify-content: space-between;
+  }
+  
+  .social-icon {
+    display: inline-block;
+    color: var(--text-color);
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .header-frame {
+      padding: 0 20px;
+    }
+  }
+  
