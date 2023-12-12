@@ -1,6 +1,7 @@
 import { Box, Grid } from '@mui/material';
 import React from 'react';
 import PlaceIcon from '@mui/icons-material/Place';
+import { ReactComponent as IconSvg } from './icon.svg';
 
 const RecJobs = (props) => {
   // Destructure the props to get the values
@@ -23,19 +24,27 @@ const RecJobs = (props) => {
           borderRadius: 2,
           borderColor: '#FFFFFF',
           boxShadow: 8,
-          width: 385,
-          height: 195,
+          width: 380,
+          height: 190,
           flexGrow: 1,
           background: '#FFFFFF',
           '&:hover': {
-            border: 'solid #005eff', // Blue border on hover          
+            border: 'solid #005eff', // Blue border on hover
           },
         }}
       >
         <Grid container spacing={2}>
           {/* first line */}
-          <Grid item xs={4} sx={{}}>
-            <Box sx={{ border: 0, height: 50, width: 50, marginLeft: 5 }}>
+          <Grid item xs={3} sx={{}}>
+            <Box
+              sx={{
+                border: 0,
+                height: 60,
+                width: 60,
+                marginLeft: 3.5,
+                marginTop: 2,
+              }}
+            >
               <img
                 src={logo_url} // Replace with your actual image source
                 alt="Job Picture"
@@ -43,16 +52,16 @@ const RecJobs = (props) => {
               />
             </Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={8} sx={{ marginTop: 2.5, marginLeft: 1 }}>
             <Grid container>
-              <Grid item xs={6} sx={{ fontSize: 10, fontWeight: 1000 }}>
+              <Grid item xs={4} sx={{ fontSize: 16, fontWeight: 500 }}>
                 <Box sx={{ marginLeft: 0, textAlign: 'left' }}>{company}</Box>
               </Grid>
 
               {hustPartner ? (
                 <Grid
                   item
-                  xs={4}
+                  xs={6}
                   sx={{
                     display: 'flex',
                     alignItems: 'center',
@@ -61,18 +70,27 @@ const RecJobs = (props) => {
                     fontSize: 10,
                     color: 'red',
                     borderRadius: 5,
-                    maxHeight: 25
+                    maxHeight: 25,
                   }}
                 >
-                  <Box sx={{ margin: 0.4, textAlign: "center" }}>HUST partner</Box>
+                  <Box
+                    sx={{
+                      margin: 0.4,
+                      textAlign: 'center',
+                      fontSize: 14,
+                      fontWeight: 500,
+                    }}
+                  >
+                    HUST partner
+                  </Box>
                 </Grid>
               ) : (
-                <Grid item xs={4}></Grid>
+                <Grid item xs={6}></Grid>
               )}
 
-              <Grid sx={{}}>
-                <Box sx={{ color: '#D1D3DB' }}>
-                  <PlaceIcon fontSize="10px" />
+              <Grid sx={{ marginTop: 1 }}>
+                <Box sx={{ color: '#939AAD' }}>
+                <IconSvg/>{" "}
                   {address}
                 </Box>
               </Grid>
@@ -83,19 +101,19 @@ const RecJobs = (props) => {
           <Grid item xs={12}>
             <Box
               sx={{
-                fontSize: 25,
+                fontSize: 20,
                 fontWeight: 'bold',
                 textAlign: 'left',
-                marginLeft: 5,
+                marginLeft: 3.5,
               }}
             >
               {jobTitle}
             </Box>
           </Grid>
-          <Grid item xs={4}>
-            <Box sx={{ textAlign: 'left', marginLeft: 5 }}>{jobType}</Box>
+          <Grid item xs={5}>
+            <Box sx={{ textAlign: 'left', marginLeft: 3.5 }}>{jobType}</Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={7}>
             <Box sx={{ textAlign: 'left' }}>
               {salaryMin}VND - {salaryMax}VND
             </Box>

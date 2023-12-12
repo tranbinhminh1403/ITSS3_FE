@@ -15,16 +15,29 @@ const Header = () => {
           </a>
         </div>
         <ul className="nav-list">
-          <a href="" className="nav-item item-1"> <p className="text-nav text-nav-1 ">Trang chủ</p> </a>
-          <a href="" className="nav-item item-2"> <p className="text-nav">Tìm việc</p> </a>
-          <a href="" className="nav-item"> <p className="text-nav">Đã ứng tuyển</p> </a>
+          <a href="" className="nav-item item-1">
+            {' '}
+            <p className="text-nav text-nav-1 ">Trang chủ</p>{' '}
+          </a>
+          <a href="" className="nav-item item-2">
+            {' '}
+            <p className="text-nav">Tìm việc</p>{' '}
+          </a>
+          <a href="" className="nav-item">
+            {' '}
+            <p className="text-nav">Đã ứng tuyển</p>{' '}
+          </a>
         </ul>
         <div className="user-avt">
-          <img src="./assets/images/avt-hung.jpg" alt="avatar user" className="avt-img" />
+          <img
+            src="./assets/images/avt-hung.jpg"
+            alt="avatar user"
+            className="avt-img"
+          />
         </div>
       </nav>
     </header>
   );
-}
+};
 
 export default Header;

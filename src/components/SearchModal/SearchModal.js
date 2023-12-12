@@ -17,7 +17,7 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
   const handleFieldChange = (event) => {
     setSelectedField(event.target.value);
   };
-  
+
   const handleMajorChange = (event) => {
     setSelectedMajor(event.target.value);
   };
