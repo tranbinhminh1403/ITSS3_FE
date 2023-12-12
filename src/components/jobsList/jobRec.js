@@ -4,7 +4,16 @@ import PlaceIcon from '@mui/icons-material/Place';
 
 const RecJobs = (props) => {
   // Destructure the props to get the values
-  const { company, hustPartner, address, jobTitle, jobType, salary } = props;
+  const {
+    company,
+    hustPartner,
+    address,
+    jobTitle,
+    jobType,
+    salaryMin,
+    salaryMax,
+    logo_url,
+  } = props;
 
   return (
     <div>
@@ -21,22 +30,19 @@ const RecJobs = (props) => {
       >
         <Grid container spacing={2}>
           {/* first line */}
-          <Grid item xs={4} sx={{  }}>
-            <Box sx={{border: 0, height: 50, width: 50, marginLeft: 5}}>
-            <img
-              src="https://cdn.donmai.us/720x720/95/0e/950e84cc0bd3eae90d519e2ac0eb00af.webp"  // Replace with your actual image source
-              alt="Job Picture"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
+          <Grid item xs={4} sx={{}}>
+            <Box sx={{ border: 0, height: 50, width: 50, marginLeft: 5 }}>
+              <img
+                src={logo_url} // Replace with your actual image source
+                alt="Job Picture"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
             </Box>
-
           </Grid>
           <Grid item xs={8}>
-            <Grid container >
-              <Grid item xs={6}  sx={{ fontSize: 10, fontWeight: 1000 }}>
-                <Box sx={{marginLeft:0, textAlign: 'left'}}>
-                  {company}
-                </Box>
+            <Grid container>
+              <Grid item xs={6} sx={{ fontSize: 10, fontWeight: 1000 }}>
+                <Box sx={{ marginLeft: 0, textAlign: 'left' }}>{company}</Box>
               </Grid>
 
               {hustPartner ? (
@@ -57,28 +63,34 @@ const RecJobs = (props) => {
               )}
 
               <Grid sx={{}}>
-                <Box sx={{ color: '#D1D3DB' }}><PlaceIcon fontSize='10px'/>{address}</Box>
+                <Box sx={{ color: '#D1D3DB' }}>
+                  <PlaceIcon fontSize="10px" />
+                  {address}
+                </Box>
               </Grid>
             </Grid>
           </Grid>
 
           {/* second line */}
           <Grid item xs={12}>
-            <Box sx={{fontSize: 25, fontWeight: "bold", textAlign: 'left', marginLeft: 5}}>
+            <Box
+              sx={{
+                fontSize: 25,
+                fontWeight: 'bold',
+                textAlign: 'left',
+                marginLeft: 5,
+              }}
+            >
               {jobTitle}
             </Box>
           </Grid>
           <Grid item xs={4}>
-            <Box sx={{ textAlign: 'left', marginLeft: 5}}>
-            {jobType}
-            </Box>
-            
+            <Box sx={{ textAlign: 'left', marginLeft: 5 }}>{jobType}</Box>
           </Grid>
           <Grid item xs={8}>
-            <Box sx={{ textAlign: 'left'}}>
-            {salary}
+            <Box sx={{ textAlign: 'left' }}>
+              {salaryMin}VND - {salaryMax}VND
             </Box>
-
           </Grid>
         </Grid>
       </Box>
