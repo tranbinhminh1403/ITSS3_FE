@@ -35,7 +35,7 @@ const SearchBar = () => {
   return (
     <div
       className="row border border-3 pt-2 pb-2"
-      style={{ backgroundColor: '#F1F2F4' }}
+      style={{ backgroundColor: '#F1F2F4', width: '91%', marginLeft: '4%' }}
     >
       <div className="col border-end pt-2">
         <div className="input-group">
