@@ -8,7 +8,7 @@ import axios from 'axios';
 import { baseURL } from '../../utils/baseUrl';
 
 const JobsList = () => {
-  const jobsPerPage = 9;
+  const jobsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
   const [jobsList, setJobsList] = useState([]);
 
