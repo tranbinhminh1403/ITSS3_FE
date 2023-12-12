@@ -16,16 +16,20 @@ const RecJobs = (props) => {
   } = props;
 
   return (
-    <div>
+    <div style={{}}>
       <Box
         sx={{
-          border: 0,
+          border: 1,
           borderRadius: 2,
+          borderColor: '#FFFFFF',
           boxShadow: 8,
           width: 385,
-          height: 170,
+          height: 195,
           flexGrow: 1,
           background: '#FFFFFF',
+          '&:hover': {
+            border: 'solid #005eff', // Blue border on hover          
+          },
         }}
       >
         <Grid container spacing={2}>
@@ -50,13 +54,17 @@ const RecJobs = (props) => {
                   item
                   xs={4}
                   sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     background: '#FEECED',
                     fontSize: 10,
                     color: 'red',
                     borderRadius: 5,
+                    maxHeight: 25
                   }}
                 >
-                  <Box sx={{ margin: 0.4 }}>HUST partner</Box>
+                  <Box sx={{ margin: 0.4, textAlign: "center" }}>HUST partner</Box>
                 </Grid>
               ) : (
                 <Grid item xs={4}></Grid>
