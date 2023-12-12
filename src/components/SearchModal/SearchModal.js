@@ -13,6 +13,55 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
   const [selectedMajor, setSelectedMajor] = useState(
     fieldData[0]?.majors[0]?.name,
   );
+  const [jobKeyword, setJobKeyword] = useState('');
+  const [location, setLocation] = useState('');
+  const [companyLink, setCompanyLink] = useState(false); 
+
+  const [yearsOfExperienceRange, setYearsOfExperienceRange] = useState({ min: 0, max: 5 });
+  const [salaryRange, setSalaryRange] = useState({ min: 0, max: 40 });
+
+  const handleYearsOfExperienceChange = (from, to) => {
+    setYearsOfExperienceRange({ min: from, max: to });
+  };
+
+  const handleSalaryChange = (from, to) => {
+    setSalaryRange({ min: from, max: to });
+  };
+
+  const [jobType, setJobType] = useState({
+    all: false,
+    partTime: false,
+    fullTime: false,
+    internship: false,
+    remote: false
+  });
+  const [companyLocation, setCompanyLocation] = useState('vietnam'); 
+
+  const handleSearch = () => {
+    const searchData = {
+      selectedField,
+      selectedMajor,
+      jobKeyword,
+      location,
+      companyLink,
+      jobType,
+      companyLocation,
+      yearsOfExperienceRange,
+      salaryRange
+    };
+
+    const jsonString = JSON.stringify(searchData, null, 2);
+
+    const blob = new Blob([jsonString], { type: 'application/json' });
+
+    const downloadLink = document.createElement('a');
+    downloadLink.href = URL.createObjectURL(blob);
+    downloadLink.download = 'searchData.json';
+
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
 
   const handleFieldChange = (event) => {
     setSelectedField(event.target.value);
@@ -66,6 +115,8 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                 placeholder="Công việc, từ khóa"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default"
+                value={jobKeyword}
+                onChange={(e) => setJobKeyword(e.target.value)}
               />
             </div>
           </div>
@@ -83,6 +134,8 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                 placeholder="Vị trí"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
               />
             </div>
           </div>
@@ -95,9 +148,11 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                     className="form-check-input"
                     type="checkbox"
                     value=""
-                    id="HUST"
+                    id="HUST_modal"
+                    checked={companyLink}
+                    onChange={(e) => setCompanyLink(e.target.checked)}
                   />
-                  <label className="form-check-label" htmlFor="HUST">
+                  <label className="form-check-label" htmlFor="HUST_modal">
                     HUST
                   </label>
                 </div>
@@ -110,7 +165,7 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                 <span className="ms-2 me-2">Thêm</span>
                 <i className="fas fa-chevron-up me-2" />
               </span>
-              <button type="button" className="btn btn-primary ms-auto">
+              <button type="button" className="btn btn-primary ms-auto"  onClick={handleSearch} >
                 Tìm kiếm
               </button>
             </div>
@@ -129,6 +184,8 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                   step={1}
                   forid="display1"
                   class="SB-1"
+                  onChange={handleYearsOfExperienceChange}
+                  setYearsOfExperienceRange
                 />
               </div>
               <div className="row">
@@ -152,6 +209,7 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                   step={10}
                   forid="display2"
                   class="SB-1"
+                  onChange={handleSalaryChange}
                 />
               </div>
               <div className="row">
@@ -176,6 +234,8 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                     className="form-check-input"
                     type="checkbox"
                     id="tatCa"
+                    checked={jobType.all}
+                    onChange={() => setJobType((prev) => ({ ...prev, all: !prev.all }))}
                   />
                   <label className="form-check-label" htmlFor="tatCa">
                     Tất cả
@@ -188,6 +248,8 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                     className="form-check-input"
                     type="checkbox"
                     id="banthoigian"
+                    checked={jobType.partTime}
+                    onChange={() => setJobType((prev) => ({ ...prev, partTime: !prev.partTime }))}
                   />
                   <label className="form-check-label" htmlFor="banthoigian">
                     Bán thời gian
@@ -200,6 +262,8 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                     className="form-check-input"
                     type="checkbox"
                     id="toanthoigian"
+                    checked={jobType.fullTime}
+                    onChange={() => setJobType((prev) => ({ ...prev, fullTime: !prev.fullTime }))}
                   />
                   <label className="form-check-label" htmlFor="toanthoigian">
                     Toàn thời gian
@@ -212,6 +276,8 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                     className="form-check-input"
                     type="checkbox"
                     id="thuctap"
+                    checked={jobType.internship}
+                    onChange={() => setJobType((prev) => ({ ...prev, internship: !prev.internship }))}
                   />
                   <label className="form-check-label" htmlFor="thuctap">
                     Thực tập
@@ -224,6 +290,8 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                     className="form-check-input"
                     type="checkbox"
                     id="lamtuxa"
+                    checked={jobType.remote}
+                    onChange={() => setJobType((prev) => ({ ...prev, remote: !prev.remote }))}
                   />
                   <label className="form-check-label" htmlFor="lamtuxa">
                     Làm từ xa
@@ -244,7 +312,8 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                     type="radio"
                     name="flexRadioDefault"
                     id="vietnam"
-                    checked
+                    checked={companyLocation === 'vietnam'}
+                    onChange={() => setCompanyLocation('vietnam')}
                   />
                   <label className="form-check-label" htmlFor="vietnam">
                     Việt Nam
@@ -258,6 +327,8 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                     type="radio"
                     name="flexRadioDefault"
                     id="nuocngoai"
+                    checked={companyLocation === 'nuocngoai'}
+                    onChange={() => setCompanyLocation('nuocngoai')}
                   />
                   <label className="form-check-label" htmlFor="nuocngoai">
                     Nước ngoài
