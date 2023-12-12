@@ -21,7 +21,7 @@ const JobsList = () => {
 
   return (
     <div style={{ margin: '0 10%', marginTop: 30, marginBottom: 30 }}>
-      <div style={{ display: 'flex', flexWrap: 'wrap', minHeight: 600 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', minHeight: 675 }}>
         {currentJobs.map((job) => (
           <div
             key={job.jobId}
