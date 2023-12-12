@@ -23,9 +23,6 @@ const Header = () => {
           <img src="./assets/images/avt-hung.jpg" alt="avatar user" className="avt-img" />
         </div>
       </nav>
-      {/* <div className="filter-frame">
-        <span>Tìm kiếm</span>
-      </div> */}
     </header>
   );
 }

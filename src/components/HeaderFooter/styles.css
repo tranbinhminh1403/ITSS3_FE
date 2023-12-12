@@ -11,6 +11,7 @@
     );
   }
   
+/* .header_footer_container{ */
   * {
     padding: 0px;
     margin: 0px;
@@ -30,7 +31,7 @@
     list-style: none;
   }
   
-  .container {
+  .container_body {
     width: 100vw;
     min-height: 100vh;
     position: relative;
@@ -236,4 +237,4 @@
       padding: 0 20px;
     }
   }
-  
+/* }   */
