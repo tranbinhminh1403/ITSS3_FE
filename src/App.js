@@ -8,10 +8,11 @@ import Footer from './components/HeaderFooter/Footer';
 function App() {
   return (
     <div className="App">
-      
-      <div className="container_body">
+      <div className="body">
         <Header/>
-        <SearchBar/>
+        <div className="container">
+          <SearchBar/>
+        </div>
         <JobsList/>
         <Footer/>
       </div>
