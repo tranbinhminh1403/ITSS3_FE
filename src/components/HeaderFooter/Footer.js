@@ -5,7 +5,7 @@ import './styles.css';
 
 const Footer = () => {
   return (
-    <footer>
+    <footer style={{marginBottom: 0}}>
       <div className="footer">
         <div className="footer-top">
           <div className="footer-left">

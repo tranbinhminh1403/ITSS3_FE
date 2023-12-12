@@ -106,6 +106,168 @@
       "jobTitle": "Cybersecurity Analyst",
       "jobType": "Part-time",
       "salary": "$70,000 - $90,000"
-    }
+    },
+    {
+      "jobId": 13,
+      "company": "Tech Dynamics",
+      "hustPartner": false,
+      "address": "789 Tech Lane, Technoville",
+      "jobTitle": "Software Tester",
+      "jobType": "Full-time",
+      "salary": "$70,000 - $85,000"
+  },
+  {
+      "jobId": 14,
+      "company": "Innovate Tech Solutions",
+      "hustPartner": true,
+      "address": "123 Innovate St, Inventotown",
+      "jobTitle": "Machine Learning Engineer",
+      "jobType": "Full-time",
+      "salary": "$95,000 - $115,000"
+  },
+  {
+      "jobId": 15,
+      "company": "Future Data Innovations",
+      "hustPartner": true,
+      "address": "555 Data Street, Dataville",
+      "jobTitle": "Business Intelligence Analyst",
+      "jobType": "Part-time",
+      "salary": "$65,000 - $80,000"
+  },
+  {
+      "jobId": 16,
+      "company": "Digital Wizards",
+      "hustPartner": false,
+      "address": "456 Digital Blvd, Wizard City",
+      "jobTitle": "Frontend Developer",
+      "jobType": "Full-time",
+      "salary": "$80,000 - $95,000"
+  },
+  {
+      "jobId": 17,
+      "company": "InnoData Solutions",
+      "hustPartner": false,
+      "address": "999 InnoData Ave, Datatown",
+      "jobTitle": "Data Engineer",
+      "jobType": "Part-time",
+      "salary": "$75,000 - $90,000"
+  },
+  {
+      "jobId": 18,
+      "company": "Tech Solutions Inc.",
+      "hustPartner": true,
+      "address": "123 Tech Plaza, TechCity",
+      "jobTitle": "Network Administrator",
+      "jobType": "Full-time",
+      "salary": "$85,000 - $100,000"
+  },
+  {
+      "jobId": 19,
+      "company": "Future Innovations Tech",
+      "hustPartner": true,
+      "address": "789 Future Tech St, Futuristan",
+      "jobTitle": "UX Researcher",
+      "jobType": "Full-time",
+      "salary": "$75,000 - $90,000"
+  },
+  {
+      "jobId": 20,
+      "company": "Data Wizards",
+      "hustPartner": false,
+      "address": "555 Data Blvd, Wizardopolis",
+      "jobTitle": "Database Administrator",
+      "jobType": "Part-time",
+      "salary": "$70,000 - $85,000"
+  },
+  {
+      "jobId": 21,
+      "company": "Innovate Marketing Solutions",
+      "hustPartner": true,
+      "address": "321 Marketing Ave, Marketville",
+      "jobTitle": "Content Marketing Specialist",
+      "jobType": "Full-time",
+      "salary": "$60,000 - $75,000"
+  },
+  {
+      "jobId": 22,
+      "company": "Tech Security Innovators",
+      "hustPartner": true,
+      "address": "987 Security Lane, Securetown",
+      "jobTitle": "Information Security Analyst",
+      "jobType": "Part-time",
+      "salary": "$80,000 - $95,000"
+  },
+  {
+      "jobId": 23,
+      "company": "Digital Future Solutions",
+      "hustPartner": false,
+      "address": "456 Digital Ave, Futuristic City",
+      "jobTitle": "UI Designer",
+      "jobType": "Full-time",
+      "salary": "$70,000 - $85,000"
+  },
+  {
+      "jobId": 24,
+      "company": "InnoTech Wizards",
+      "hustPartner": true,
+      "address": "999 InnoTech Blvd, InnoCity",
+      "jobTitle": "Systems Analyst",
+      "jobType": "Full-time",
+      "salary": "$90,000 - $105,000"
+  },
+  {
+      "jobId": 25,
+      "company": "Tech Innovate Hub",
+      "hustPartner": true,
+      "address": "123 Hub St, Hubville",
+      "jobTitle": "IT Support Specialist",
+      "jobType": "Part-time",
+      "salary": "$55,000 - $70,000"
+  },
+  {
+      "jobId": 26,
+      "company": "Future Digital Wizards",
+      "hustPartner": true,
+      "address": "789 Digital Blvd, Digitaltopia",
+      "jobTitle": "Digital Analyst",
+      "jobType": "Full-time",
+      "salary": "$65,000 - $80,000"
+  },
+  {
+      "jobId": 27,
+      "company": "Innovate Tech Hub",
+      "hustPartner": false,
+      "address": "555 Tech Hub Ave, Hubtopia",
+      "jobTitle": "Software Architect",
+      "jobType": "Part-time",
+      "salary": "$85,000 - $100,000"
+  },
+  {
+      "jobId": 28,
+      "company": "Data Solutions Innovate",
+      "hustPartner": true,
+      "address": "321 Data Innovation Lane, Datapolis",
+      "jobTitle": "Big Data Engineer",
+      "jobType": "Full-time",
+      "salary": "$95,000 - $110,000"
+  },
+  {
+      "jobId": 29,
+      "company": "Tech Marketing Innovations",
+      "hustPartner": true,
+      "address": "987 Tech Blvd, Marketopolis",
+      "jobTitle": "Social Media Manager",
+      "jobType": "Full-time",
+      "salary": "$70,000 - $85,000"
+  },
+  {
+      "jobId": 30,
+      "company": "Future Data Tech",
+      "hustPartner": false,
+      "address": "456 Ave, Dataville",
+      "jobTitle": "IT Consultant",
+      "jobType": "Part-time",
+      "salary": "$80,000 - $95,000"
+  }
   ]
   

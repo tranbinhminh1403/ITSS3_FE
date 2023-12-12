@@ -15,6 +15,7 @@
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
+    bottom: 0;
   }
   
   html {
@@ -42,7 +43,8 @@
     /* position: absolute;*/
     bottom: 0;
     width: 100%;
-    height: 425px;
+    /* height: 425px; */     
+    /* fix white space below footer */
   }
   
   .header-frame {
