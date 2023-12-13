@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import './DoubleScrollBar.css';
 
 function DoubleScrollBar({
-  min, max, step, forid,
+  min, max, step, forid, onChange
 }) {
   const [inputFrom, setInputFrom] = useState(min);
   const [inputTo, setInputTo] = useState(max);
 
   useEffect(() => {
     const slider = document.getElementById(`slider-${forid}`);
-    console.log({ inputFrom, inputTo });
     if (inputFrom > inputTo) {
       slider.style.right = `${100 - ((inputFrom - min) / (max - min)) * 100}%`;
       slider.style.left = `${((inputTo - min) / (max - min)) * 100}%`;
@@ -18,7 +17,8 @@ function DoubleScrollBar({
       slider.style.right = `${100 - ((inputTo - min) / (max - min)) * 100}%`;
       slider.style.left = `${((inputFrom - min) / (max - min)) * 100}%`;
     }
-  }, [inputFrom, inputTo, min, max, forid]);
+    onChange(inputFrom, inputTo);
+  }, [inputFrom, inputTo, min, max, forid, onChange]);
 
   return (
     <div className="SB-1">
@@ -52,6 +52,7 @@ DoubleScrollBar.propTypes = {
   max: PropTypes.number.isRequired,
   step: PropTypes.number.isRequired,
   forid: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default DoubleScrollBar;
