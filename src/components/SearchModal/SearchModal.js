@@ -6,6 +6,9 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import DoubleScrollBar from '../DoubleScrollBar/DoubleScrollBar';
 import './SearchModal.css';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { baseURL } from '../../utils/baseUrl';
+import RecJobs from '../jobsList/jobRec';
 
 const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
   const [selectedField, setSelectedField] = useState(fieldData[0]?.name);
@@ -15,10 +18,22 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
   );
   const [jobKeyword, setJobKeyword] = useState('');
   const [location, setLocation] = useState('');
-  const [companyLink, setCompanyLink] = useState(false); 
-
-  const [yearsOfExperienceRange, setYearsOfExperienceRange] = useState({ min: 0, max: 5 });
+  const [companyLink, setCompanyLink] = useState(false);
+  const [filterData, setFilterData] = useState([]);
+  const [yearsOfExperienceRange, setYearsOfExperienceRange] = useState({
+    min: 0,
+    max: 5,
+  });
   const [salaryRange, setSalaryRange] = useState({ min: 0, max: 40 });
+  const [jobType, setJobType] = useState([]);
+  const [checked, setChecked] = useState({
+    all: false,
+    partTime: false,
+    fullTime: false,
+    internship: false,
+    remote: false,
+  });
+  const [isDomestic, setIsDomestic] = useState(true);
 
   const handleYearsOfExperienceChange = (from, to) => {
     setYearsOfExperienceRange({ min: from, max: to });
@@ -28,39 +43,45 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
     setSalaryRange({ min: from, max: to });
   };
 
-  const [jobType, setJobType] = useState({
-    all: false,
-    partTime: false,
-    fullTime: false,
-    internship: false,
-    remote: false
-  });
-  const [companyLocation, setCompanyLocation] = useState('vietnam'); 
-
-  const handleSearch = () => {
+  const handleSearch = async () => {
     const searchData = {
-      selectedField,
-      selectedMajor,
-      jobKeyword,
-      location,
-      companyLink,
-      jobType,
-      companyLocation,
-      yearsOfExperienceRange,
-      salaryRange
+      field: selectedField,
+      major: selectedMajor,
+      hust_partner: companyLink,
+      is_domestic: isDomestic,
+      yearsOfExperienceRange: yearsOfExperienceRange,
+      salaryRange: salaryRange,
+      jobType: jobType,
     };
 
-    const jsonString = JSON.stringify(searchData, null, 2);
-
-    const blob = new Blob([jsonString], { type: 'application/json' });
-
-    const downloadLink = document.createElement('a');
-    downloadLink.href = URL.createObjectURL(blob);
-    downloadLink.download = 'searchData.json';
-
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+    try {
+      const response = await axios.post(`${baseURL}jobs`, searchData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log(response.data);
+      if (response.data.length > 0) {
+        response.data.map((job) => {
+          return (
+            <RecJobs
+              company={job.company.name}
+              hustPartner={job.company.hust_partner}
+              address={job.job_location}
+              jobTitle={job.title}
+              logo_url={job.company.logo_url}
+              jobType={job.jobTypeRelations[0]?.type.name}
+              salaryMin={job.salary_min}
+              salaryMax={job.salary_max}
+            />
+          );
+        });
+      } else {
+        alert('No jobs found');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleFieldChange = (event) => {
@@ -165,7 +186,11 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                 <span className="ms-2 me-2">Thêm</span>
                 <i className="fas fa-chevron-up me-2" />
               </span>
-              <button type="button" className="btn btn-primary ms-auto"  onClick={handleSearch} >
+              <button
+                type="button"
+                className="btn btn-primary ms-auto"
+                onClick={handleSearch}
+              >
                 Tìm kiếm
               </button>
             </div>
@@ -234,8 +259,20 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                     className="form-check-input"
                     type="checkbox"
                     id="tatCa"
-                    checked={jobType.all}
-                    onChange={() => setJobType((prev) => ({ ...prev, all: !prev.all }))}
+                    checked={checked.all}
+                    onChange={() => {
+                      if (checked.all) {
+                        setJobType((prev) =>
+                          prev.filter((type) => type !== 'Tất cả'),
+                        );
+                      } else {
+                        setJobType((prev) => [...prev, 'Tất cả']);
+                      }
+                      setChecked((prev) => ({
+                        ...prev,
+                        all: !prev.all,
+                      }));
+                    }}
                   />
                   <label className="form-check-label" htmlFor="tatCa">
                     Tất cả
@@ -248,8 +285,20 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                     className="form-check-input"
                     type="checkbox"
                     id="banthoigian"
-                    checked={jobType.partTime}
-                    onChange={() => setJobType((prev) => ({ ...prev, partTime: !prev.partTime }))}
+                    checked={checked.partTime}
+                    onChange={() => {
+                      if (checked.partTime) {
+                        setJobType((prev) =>
+                          prev.filter((type) => type !== 'Bán thời gian'),
+                        );
+                      } else {
+                        setJobType((prev) => [...prev, 'Bán thời gian']);
+                      }
+                      setChecked((prev) => ({
+                        ...prev,
+                        partTime: !prev.partTime,
+                      }));
+                    }}
                   />
                   <label className="form-check-label" htmlFor="banthoigian">
                     Bán thời gian
@@ -262,8 +311,20 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                     className="form-check-input"
                     type="checkbox"
                     id="toanthoigian"
-                    checked={jobType.fullTime}
-                    onChange={() => setJobType((prev) => ({ ...prev, fullTime: !prev.fullTime }))}
+                    checked={checked.fullTime}
+                    onChange={() => {
+                      if (checked.fullTime) {
+                        setJobType((prev) =>
+                          prev.filter((type) => type !== 'Toàn thời gian'),
+                        );
+                      } else {
+                        setJobType((prev) => [...prev, 'Toàn thời gian']);
+                      }
+                      setChecked((prev) => ({
+                        ...prev,
+                        fullTime: !prev.fullTime,
+                      }));
+                    }}
                   />
                   <label className="form-check-label" htmlFor="toanthoigian">
                     Toàn thời gian
@@ -276,8 +337,20 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                     className="form-check-input"
                     type="checkbox"
                     id="thuctap"
-                    checked={jobType.internship}
-                    onChange={() => setJobType((prev) => ({ ...prev, internship: !prev.internship }))}
+                    checked={checked.internship}
+                    onChange={() => {
+                      if (checked.internship) {
+                        setJobType((prev) =>
+                          prev.filter((type) => type !== 'Thực Tập'),
+                        );
+                      } else {
+                        setJobType((prev) => [...prev, 'Thực Tập']);
+                      }
+                      setChecked((prev) => ({
+                        ...prev,
+                        internship: !prev.internship,
+                      }));
+                    }}
                   />
                   <label className="form-check-label" htmlFor="thuctap">
                     Thực tập
@@ -290,8 +363,20 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                     className="form-check-input"
                     type="checkbox"
                     id="lamtuxa"
-                    checked={jobType.remote}
-                    onChange={() => setJobType((prev) => ({ ...prev, remote: !prev.remote }))}
+                    checked={checked.remote}
+                    onChange={() => {
+                      if (checked.remote) {
+                        setJobType((prev) =>
+                          prev.filter((type) => type !== 'Làm từ xa'),
+                        );
+                      } else {
+                        setJobType((prev) => [...prev, 'Làm từ xa']);
+                      }
+                      setChecked((prev) => ({
+                        ...prev,
+                        remote: !prev.remote,
+                      }));
+                    }}
                   />
                   <label className="form-check-label" htmlFor="lamtuxa">
                     Làm từ xa
@@ -312,8 +397,8 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                     type="radio"
                     name="flexRadioDefault"
                     id="vietnam"
-                    checked={companyLocation === 'vietnam'}
-                    onChange={() => setCompanyLocation('vietnam')}
+                    checked={isDomestic}
+                    onChange={() => setIsDomestic(true)}
                   />
                   <label className="form-check-label" htmlFor="vietnam">
                     Việt Nam
@@ -327,8 +412,8 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                     type="radio"
                     name="flexRadioDefault"
                     id="nuocngoai"
-                    checked={companyLocation === 'nuocngoai'}
-                    onChange={() => setCompanyLocation('nuocngoai')}
+                    checked={!isDomestic}
+                    onChange={() => setIsDomestic(false)}
                   />
                   <label className="form-check-label" htmlFor="nuocngoai">
                     Nước ngoài
