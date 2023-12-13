@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { baseURL } from '../../utils/baseUrl';
 import RecJobs from '../jobsList/jobRec';
+import { useCallback } from 'react';
 
 const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
   const [selectedField, setSelectedField] = useState(fieldData[0]?.name);
@@ -35,13 +36,13 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
   });
   const [isDomestic, setIsDomestic] = useState(true);
 
-  const handleYearsOfExperienceChange = (from, to) => {
+  const handleYearsOfExperienceChange =  useCallback((from, to) => {
     setYearsOfExperienceRange({ min: from, max: to });
-  };
+  }, [setYearsOfExperienceRange]);
 
-  const handleSalaryChange = (from, to) => {
+  const handleSalaryChange =  useCallback((from, to) => {
     setSalaryRange({ min: from, max: to });
-  };
+  }, [setSalaryRange]);
 
   const handleSearch = async () => {
     const searchData = {
