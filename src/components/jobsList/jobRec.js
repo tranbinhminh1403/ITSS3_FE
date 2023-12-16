@@ -23,7 +23,7 @@ const RecJobs = (props) => {
           border: 1,
           borderRadius: 2,
           borderColor: '#FFFFFF',
-          boxShadow: 8,
+          boxShadow: 5,
           width: 380,
           height: 190,
           flexGrow: 1,
