@@ -6,7 +6,6 @@ import './styles.css';
 const Header = () => {
   return (
     <header className="header">
-      <div className="header-frame"></div>
       <nav className="header-nav">
         <div className="logo">
           <a href="#" className="logobk logo-header">
