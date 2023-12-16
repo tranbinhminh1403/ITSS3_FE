@@ -29,6 +29,7 @@ const RecJobs = (props) => {
           flexGrow: 1,
           background: '#FFFFFF',
           '&:hover': {
+            borderWidth: 1,
             border: 'solid #005eff', // Blue border on hover
           },
         }}
