@@ -224,7 +224,7 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                 <div className="horizontal-row p-2 ">
                   {[0, 1, 2, 3, 4, 5].map((value) => (
                     <div key={value} className="label">
-                      {value}
+                      {value >= 5 ? `4+` : value}
                     </div>
                   ))}
                 </div>
