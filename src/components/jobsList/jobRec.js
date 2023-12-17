@@ -90,8 +90,7 @@ const RecJobs = (props) => {
 
               <Grid sx={{ marginTop: 1 }}>
                 <Box sx={{ color: '#939AAD' }}>
-                <IconSvg/>{" "}
-                  {address}
+                  <IconSvg /> {address}
                 </Box>
               </Grid>
             </Grid>
