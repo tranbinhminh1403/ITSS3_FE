@@ -16,6 +16,14 @@ const RecJobs = (props) => {
     logo_url,
   } = props;
 
+  function formatNumberWithPeriods(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
+  const formattedSalaryMin = formatNumberWithPeriods(salaryMin * 1000);
+
+  const formattedSalaryMax = formatNumberWithPeriods(salaryMax * 1000);
+
   return (
     <div style={{}}>
       <Box
@@ -110,12 +118,12 @@ const RecJobs = (props) => {
               {jobTitle}
             </Box>
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={4}>
             <Box sx={{ textAlign: 'left', marginLeft: 3.5 }}>{jobType}</Box>
           </Grid>
-          <Grid item xs={7}>
+          <Grid item xs={8}>
             <Box sx={{ textAlign: 'left' }}>
-              {salaryMin} VND - {salaryMax} VND
+              {formattedSalaryMin} VND - {formattedSalaryMax} VND
             </Box>
           </Grid>
         </Grid>

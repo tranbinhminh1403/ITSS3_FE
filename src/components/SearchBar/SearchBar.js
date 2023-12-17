@@ -37,13 +37,22 @@ const SearchBar = () => {
       className="row border border-3 pt-4 pb-4"
       style={{ backgroundColor: '#F1F2F4', overflow: 'hidden', width: '100%' }}
     >
-      <p style={{ marginLeft: '11%', textAlign: 'left' }}>Tìm kiếm</p>
+      <p
+        style={{
+          marginLeft: '11%',
+          textAlign: 'left',
+          fontSize: 18,
+          fontWeight: 500,
+        }}
+      >
+        Tìm kiếm
+      </p>
       <div
         className="row pt-2 pb-2"
         style={{
           backgroundColor: 'white',
           margin: '0 16% 0 11%',
-          width: '73%',
+          width: '78.5%',
         }}
       >
         <div className="col border-end pt-2">
