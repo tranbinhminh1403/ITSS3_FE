@@ -118,10 +118,10 @@ const RecJobs = (props) => {
               {jobTitle}
             </Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={4.5}>
             <Box sx={{ textAlign: 'left', marginLeft: 3.5 }}>{jobType}</Box>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={7.5}>
             <Box sx={{ textAlign: 'left' }}>
               {formattedSalaryMin} VND - {formattedSalaryMax} VND
             </Box>
