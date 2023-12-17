@@ -10,13 +10,13 @@ const Header = () => {
     <header className="header">
       <nav className="header-nav">
         <div className="logo">
-          <a href="#" className="logobk logo-header">
+          <a href="/" className="logobk logo-header">
             <i className="fa-solid fa-briefcase logo-icon "></i>
             <p className="text-logo">BKTimViec</p>
           </a>
         </div>
         <ul className="nav-list">
-          <a href="" className="nav-item item-1">
+          <a href="/" className="nav-item item-1">
             {' '}
             <p className="text-nav text-nav-1 ">Trang chủ</p>{' '}
           </a>
