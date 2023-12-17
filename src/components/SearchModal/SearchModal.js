@@ -36,13 +36,19 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
   });
   const [isDomestic, setIsDomestic] = useState(true);
 
-  const handleYearsOfExperienceChange =  useCallback((from, to) => {
-    setYearsOfExperienceRange({ min: from, max: to });
-  }, [setYearsOfExperienceRange]);
+  const handleYearsOfExperienceChange = useCallback(
+    (from, to) => {
+      setYearsOfExperienceRange({ min: from, max: to });
+    },
+    [setYearsOfExperienceRange],
+  );
 
-  const handleSalaryChange =  useCallback((from, to) => {
-    setSalaryRange({ min: from, max: to });
-  }, [setSalaryRange]);
+  const handleSalaryChange = useCallback(
+    (from, to) => {
+      setSalaryRange({ min: from, max: to });
+    },
+    [setSalaryRange],
+  );
 
   const handleSearch = async () => {
     const searchData = {
@@ -218,7 +224,7 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                 <div className="horizontal-row p-2 ">
                   {[0, 1, 2, 3, 4, 5].map((value) => (
                     <div key={value} className="label">
-                      {value >= 5 ? `4+` : value}
+                      {value}
                     </div>
                   ))}
                 </div>
