@@ -36,13 +36,19 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
   });
   const [isDomestic, setIsDomestic] = useState(true);
 
-  const handleYearsOfExperienceChange =  useCallback((from, to) => {
-    setYearsOfExperienceRange({ min: from, max: to });
-  }, [setYearsOfExperienceRange]);
+  const handleYearsOfExperienceChange = useCallback(
+    (from, to) => {
+      setYearsOfExperienceRange({ min: from, max: to });
+    },
+    [setYearsOfExperienceRange],
+  );
 
-  const handleSalaryChange =  useCallback((from, to) => {
-    setSalaryRange({ min: from, max: to });
-  }, [setSalaryRange]);
+  const handleSalaryChange = useCallback(
+    (from, to) => {
+      setSalaryRange({ min: from, max: to });
+    },
+    [setSalaryRange],
+  );
 
   const handleSearch = async () => {
     const searchData = {
