@@ -23,7 +23,7 @@ const RecJobs = (props) => {
           border: 1,
           borderRadius: 2,
           borderColor: '#FFFFFF',
-          boxShadow: 8,
+          boxShadow: 5,
           width: 380,
           height: 190,
           flexGrow: 1,
@@ -115,7 +115,7 @@ const RecJobs = (props) => {
           </Grid>
           <Grid item xs={7}>
             <Box sx={{ textAlign: 'left' }}>
-              {salaryMin}VND - {salaryMax}VND
+              {salaryMin} VND - {salaryMax} VND
             </Box>
           </Grid>
         </Grid>
