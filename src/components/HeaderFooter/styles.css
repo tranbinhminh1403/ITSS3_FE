@@ -80,6 +80,7 @@
     width: 169px;
     height: 40px;
     line-height: 40px;
+    font-weight: bold;
   }
   
   .header-nav {
@@ -127,6 +128,7 @@
     height: 48px;
     border-radius: 50%;
     margin: 23px 23px;
+    cursor: pointer;
   }
   
   .filter-frame {

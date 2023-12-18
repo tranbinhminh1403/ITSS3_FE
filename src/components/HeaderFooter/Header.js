@@ -1,21 +1,22 @@
 // Header.js
 import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import avatar from '../../assets/images/avt-hung.jpg'
 import './styles.css';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <header className="header">
-      <div className="header-frame"></div>
       <nav className="header-nav">
         <div className="logo">
-          <a href="#" className="logobk logo-header">
+          <a href="/" className="logobk logo-header">
             <i className="fa-solid fa-briefcase logo-icon "></i>
             <p className="text-logo">BKTimViec</p>
           </a>
         </div>
         <ul className="nav-list">
-          <a href="" className="nav-item item-1">
+          <a href="/" className="nav-item item-1">
             {' '}
             <p className="text-nav text-nav-1 ">Trang chủ</p>{' '}
           </a>
@@ -30,7 +31,7 @@ const Header = () => {
         </ul>
         <div className="user-avt">
           <img
-            src="./assets/images/avt-hung.jpg"
+            src={avatar}
             alt="avatar user"
             className="avt-img"
           />
