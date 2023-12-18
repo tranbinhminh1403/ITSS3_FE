@@ -5,7 +5,7 @@ import { ReactComponent as UrlSVG } from './url.svg';
 import { ReactComponent as PhoneSVG } from './phone.svg';
 import { ReactComponent as MailSVG } from './mail.svg';
 
-const ShortDesc = () => {
+const ShortDesc = ({ data }) => {
   return (
     <div>
       <Box
@@ -35,7 +35,17 @@ const ShortDesc = () => {
                 <Grid item xs={2}>
                   <Box
                     sx={{ width: 96, height: 96, border: 1, borderRadius: 50 }}
-                  ></Box>
+                  >
+                    <img
+                      src={data.company?.logo_url} // Replace with your actual image source
+                      alt="Company Picture"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
+                  </Box>
                 </Grid>
 
                 <Grid item xs={10}>
@@ -47,25 +57,29 @@ const ShortDesc = () => {
                       >
                         <Grid item>
                           <Box sx={{ fontSize: 24, fontWeight: 500 }}>
-                            Senior UX Designer
+                            {data.title}
                           </Box>
                         </Grid>
                         <Grid item>
-                          <Box
-                            sx={{
-                              marginLeft: 2,
-                              background: '#FEECED',
-                              color: 'red',
-                              border: 0,
-                              borderRadius: 5,
-                              paddingTop: 0.5,
-                              paddingBottom: 0.5,
-                              paddingLeft: 1,
-                              paddingRight: 1,
-                            }}
-                          >
-                            Hust partner
-                          </Box>
+                          {data.company?.hust_partner ? (
+                            <Box
+                              sx={{
+                                marginLeft: 2,
+                                background: '#FEECED',
+                                color: 'red',
+                                border: 0,
+                                borderRadius: 5,
+                                paddingTop: 0.5,
+                                paddingBottom: 0.5,
+                                paddingLeft: 1,
+                                paddingRight: 1,
+                              }}
+                            >
+                              Hust partner
+                            </Box>
+                          ) : (
+                            <></>
+                          )}
                         </Grid>
                         <Grid item>
                           <Box
@@ -81,7 +95,7 @@ const ShortDesc = () => {
                               paddingRight: 1,
                             }}
                           >
-                            Toàn thời gian
+                            {data.jobTypeRelations[0]?.type.name}
                           </Box>
                         </Grid>
                       </Grid>
@@ -90,19 +104,19 @@ const ShortDesc = () => {
                       <Grid container>
                         <Grid item>
                           <Box sx={{ marginLeft: 1 }}>
-                            <UrlSVG />
+                            <UrlSVG /> {data.company?.website}
                           </Box>
                         </Grid>
 
                         <Grid item>
                           <Box sx={{ marginLeft: 1 }}>
-                            <PhoneSVG />
+                            <PhoneSVG /> {data.company?.phone_number}
                           </Box>
                         </Grid>
 
                         <Grid item>
                           <Box sx={{ marginLeft: 1 }}>
-                            <MailSVG />
+                            <MailSVG /> {data.company?.email}
                           </Box>
                         </Grid>
                       </Grid>
