@@ -16,6 +16,14 @@ const RecJobs = (props) => {
     logo_url,
   } = props;
 
+  function formatNumberWithPeriods(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
+  const formattedSalaryMin = formatNumberWithPeriods(salaryMin * 1000);
+
+  const formattedSalaryMax = formatNumberWithPeriods(salaryMax * 1000);
+
   return (
     <div style={{}}>
       <Box
@@ -23,12 +31,13 @@ const RecJobs = (props) => {
           border: 1,
           borderRadius: 2,
           borderColor: '#FFFFFF',
-          boxShadow: 8,
+          boxShadow: 5,
           width: 380,
           height: 190,
           flexGrow: 1,
           background: '#FFFFFF',
           '&:hover': {
+            borderWidth: 1,
             border: 'solid #005eff', // Blue border on hover
           },
         }}
@@ -90,8 +99,7 @@ const RecJobs = (props) => {
 
               <Grid sx={{ marginTop: 1 }}>
                 <Box sx={{ color: '#939AAD' }}>
-                <IconSvg/>{" "}
-                  {address}
+                  <IconSvg /> {address}
                 </Box>
               </Grid>
             </Grid>
@@ -110,12 +118,12 @@ const RecJobs = (props) => {
               {jobTitle}
             </Box>
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={4.5}>
             <Box sx={{ textAlign: 'left', marginLeft: 3.5 }}>{jobType}</Box>
           </Grid>
-          <Grid item xs={7}>
+          <Grid item xs={7.5}>
             <Box sx={{ textAlign: 'left' }}>
-              {salaryMin}VND - {salaryMax}VND
+              {formattedSalaryMin} VND - {formattedSalaryMax} VND
             </Box>
           </Grid>
         </Grid>

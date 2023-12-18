@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { baseURL } from '../../utils/baseUrl';
 import RecJobs from '../jobsList/jobRec';
+import { useCallback } from 'react';
 
 const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
   const [selectedField, setSelectedField] = useState(fieldData[0]?.name);
@@ -35,13 +36,19 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
   });
   const [isDomestic, setIsDomestic] = useState(true);
 
-  const handleYearsOfExperienceChange = (from, to) => {
-    setYearsOfExperienceRange({ min: from, max: to });
-  };
+  const handleYearsOfExperienceChange = useCallback(
+    (from, to) => {
+      setYearsOfExperienceRange({ min: from, max: to });
+    },
+    [setYearsOfExperienceRange],
+  );
 
-  const handleSalaryChange = (from, to) => {
-    setSalaryRange({ min: from, max: to });
-  };
+  const handleSalaryChange = useCallback(
+    (from, to) => {
+      setSalaryRange({ min: from, max: to });
+    },
+    [setSalaryRange],
+  );
 
   const handleSearch = async () => {
     const searchData = {
@@ -241,7 +248,7 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                 <div className="horizontal-row p-2 ">
                   {[0, 10, 20, 30, 40].map((value) => (
                     <div key={value} className="label">
-                      {value}
+                      {value >= 40 ? `30+` : value}
                     </div>
                   ))}
                 </div>
