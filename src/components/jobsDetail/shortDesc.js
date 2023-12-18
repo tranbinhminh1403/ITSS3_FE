@@ -4,8 +4,27 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { ReactComponent as UrlSVG } from './url.svg';
 import { ReactComponent as PhoneSVG } from './phone.svg';
 import { ReactComponent as MailSVG } from './mail.svg';
+import FormModal from '../FormModal/FormModal';
+import { useState } from 'react';
 
 const ShortDesc = ({ data }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log(data);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const propData = {
+    jobId: data.id,
+    jobTitle: data.title,
+    companyEmail: data.company.email,
+  };
+
   return (
     <div>
       <Box
@@ -137,6 +156,7 @@ const ShortDesc = ({ data }) => {
                   fontSize: 14,
                   textTransform: 'none',
                 }}
+                onClick={handleOpenModal}
               >
                 {' '}
                 Ứng Tuyển Ngay <ArrowForwardIcon sx={{ marginLeft: 2 }} />
@@ -156,6 +176,11 @@ const ShortDesc = ({ data }) => {
           </Grid>
         </Grid>
       </Box>
+      <FormModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        propData={propData}
+      />
     </div>
   );
 };
