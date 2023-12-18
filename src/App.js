@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import JobsListDetail from './components/jobsList/jobListDetail';
 import JobsList from './components/jobsList/jobsList';
 import SearchBar from './components/SearchBar/SearchBar';
 import Header from './components/HeaderFooter/Header';
@@ -13,6 +14,15 @@ function App() {
   return (
     <div className="App">
       <div className="body">
+
+        <Header />
+        <div className="container">
+          <SearchBar />
+        </div>
+        <JobsListDetail/>
+        <JobsList />
+        <Footer />
+
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -20,6 +30,7 @@ function App() {
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </BrowserRouter>
+
       </div>
     </div>
   );
