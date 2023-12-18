@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import JobsListDetail from './components/jobsList/jobListDetail';
 import JobsList from './components/jobsList/jobsList';
 import SearchBar from './components/SearchBar/SearchBar';
 import Header from './components/HeaderFooter/Header';
@@ -13,6 +14,7 @@ function App() {
         <div className="container">
           <SearchBar />
         </div>
+        <JobsListDetail/>
         <JobsList />
         <Footer />
       </div>
