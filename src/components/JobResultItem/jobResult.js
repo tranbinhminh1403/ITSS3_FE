@@ -65,8 +65,8 @@ const JobItem = ({ jobItem }) => {
                   fontSize: '14px',
                   color: '#636A80',
                   fontWeight: 400,
-                  marginLeft: '10px',
-                  marginRight: '10px',
+                  marginLeft: '16px',
+                  marginRight: '16px',
                 }}
               >
                 <DolarSvg /> {formattedSalaryMin} VND - {formattedSalaryMax} VND
