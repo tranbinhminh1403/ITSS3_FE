@@ -5,7 +5,7 @@ import { ReactComponent as Icon12 } from './icon/icon12.svg';
 import { ReactComponent as Icon13 } from './icon/icon13.svg';
 import { ReactComponent as Icon21 } from './icon/icon21.svg';
 import { ReactComponent as Icon22 } from './icon/icon22.svg';
-import handleDate from '../../utils/handleDate';
+import { handleDate } from '../../utils/handleDate';
 import formatNumberWithPeriods from '../../utils/formatNumber';
 
 const JobCardDesc = ({ jobCardData }) => {
