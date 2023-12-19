@@ -6,6 +6,7 @@ import { ReactComponent as PhoneSVG } from './phone.svg';
 import { ReactComponent as MailSVG } from './mail.svg';
 import FormModal from '../FormModal/FormModal';
 import { useState } from 'react';
+import handleDate from '../../utils/handleDate';
 
 const ShortDesc = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,7 +14,8 @@ const ShortDesc = ({ data }) => {
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
-
+  const expiredDate = handleDate(data.expired_at);
+  
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
@@ -169,7 +171,7 @@ const ShortDesc = ({ data }) => {
                 }}
               >
                 Ngày hết hạn:{' '}
-                <span style={{ color: 'red' }}>June 30, 2021</span>
+                <span style={{ color: 'red' }}>{expiredDate}</span>
               </div>
             </Box>
           </Grid>
