@@ -48,7 +48,7 @@
   
   .job-type {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-around; */
   }
   
   .job-info {
@@ -64,7 +64,7 @@
   
   .job-info-bottom {
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     width: 100%;
   }
   
@@ -75,7 +75,7 @@
     width: 116px;
     text-align: center;
     margin-left: 10px;
-    /* margin-right: 10px; */
+    margin-right: 3px;
   
   }
   
@@ -92,8 +92,8 @@
     height: 26px;
     width: 116px;
     text-align: center;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 3px;
+    margin-right: 3px;
   
   }
   
