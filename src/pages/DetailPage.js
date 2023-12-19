@@ -36,7 +36,7 @@ export default function DetailPage() {
         <ShortDesc data={jobData} />
         <JobsDetail data={jobData} />
         <div className="spacer" style={{ flex: 1 }} />
-        <Footer />
+        <Footer marginTop={300}/>
       </div>
     </div>
   );

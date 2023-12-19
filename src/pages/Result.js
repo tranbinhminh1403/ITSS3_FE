@@ -12,7 +12,7 @@ export default function Result() {
       <Header />
       <SearchBar />
       <JobResult propData={data} />
-      {/* <Footer /> */}
+      <Footer marginTop={300}/>
     </div>
   );
 }
