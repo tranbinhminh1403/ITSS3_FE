@@ -12,6 +12,8 @@ const JobCardDesc = ({ jobCardData }) => {
   console.log(jobCardData);
   const createdDate = handleDate(jobCardData.updated_at);
 
+  const expiredDate = handleDate(jobCardData.expired_at);
+
   const formattedSalaryMin = formatNumberWithPeriods(
     jobCardData.salary_min * 1000,
   );
@@ -64,7 +66,7 @@ const JobCardDesc = ({ jobCardData }) => {
             <Box sx={{ color: '#767F8C', fontSize: 12, fontWeight: 400 }}>
               NGÀY HẾT HẠN:
             </Box>
-            <Box sx={{ fontWeight: 500, fontSize: 14 }}>14 June, 2021</Box>
+            <Box sx={{ fontWeight: 500, fontSize: 14 }}>{expiredDate}</Box>
           </Box>
         </Grid>
 
