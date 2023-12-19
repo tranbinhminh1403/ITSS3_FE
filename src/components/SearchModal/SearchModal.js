@@ -10,6 +10,7 @@ import axios from 'axios';
 import { baseURL } from '../../utils/baseUrl';
 import RecJobs from '../jobsList/jobRec';
 import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
   const [selectedField, setSelectedField] = useState(fieldData[0]?.name);
@@ -35,6 +36,8 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
     remote: false,
   });
   const [isDomestic, setIsDomestic] = useState(true);
+
+  const navigate = useNavigate();
 
   const handleYearsOfExperienceChange = useCallback(
     (from, to) => {
@@ -67,22 +70,8 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
           'Content-Type': 'application/json',
         },
       });
-      console.log(response.data);
       if (response.data.length > 0) {
-        response.data.map((job) => {
-          return (
-            <RecJobs
-              company={job.company.name}
-              hustPartner={job.company.hust_partner}
-              address={job.job_location}
-              jobTitle={job.title}
-              logo_url={job.company.logo_url}
-              jobType={job.jobTypeRelations[0]?.type.name}
-              salaryMin={job.salary_min}
-              salaryMax={job.salary_max}
-            />
-          );
-        });
+        navigate('result', { state: { data: response.data } });
       } else {
         alert('No jobs found');
       }
@@ -168,22 +157,24 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
             </div>
           </div>
           <div className="col border-end pt-2 ">
-            <div className="input-group align-items-center">
-              <div className="form-check">
-                <p>Doanh nghiệp liên kết</p>
-                <div className="container">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="HUST_modal"
-                    checked={companyLink}
-                    onChange={(e) => setCompanyLink(e.target.checked)}
-                  />
-                  <label className="form-check-label" htmlFor="HUST_modal">
-                    HUST
-                  </label>
+            <div className="input-group ">
+              <div className="form-check d-flex align-items-center">
+                <div className="container d-flex align-items-center me-4">
+                  <p className='mt-2'>Doanh nghiệp liên kết</p>
                 </div>
+              </div>
+              <div className="form-check mt-2">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="HUST_modal"
+                  checked={companyLink}
+                  onChange={(e) => setCompanyLink(e.target.checked)}
+                />
+                <label className="form-check-label" htmlFor="HUST_modal">
+                  HUST
+                </label>
               </div>
             </div>
           </div>

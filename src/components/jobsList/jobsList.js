@@ -51,6 +51,7 @@ const JobsList = () => {
               }}
             >
               <RecJobs
+                id={job.id}
                 company={job.company.name}
                 hustPartner={job.company.hust_partner}
                 address={job.job_location}

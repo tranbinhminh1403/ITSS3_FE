@@ -1,11 +1,14 @@
 import { Box, Grid } from '@mui/material';
 import React from 'react';
 import PlaceIcon from '@mui/icons-material/Place';
-import { ReactComponent as IconSvg } from './icon.svg';
+import { ReactComponent as IconSvg } from '../../assets/icon.svg';
+import formatNumberWithPeriods from '../../utils/formatNumber';
+import { useNavigate } from 'react-router-dom';
 
 const RecJobs = (props) => {
   // Destructure the props to get the values
   const {
+    id,
     company,
     hustPartner,
     address,
@@ -16,16 +19,23 @@ const RecJobs = (props) => {
     logo_url,
   } = props;
 
-  function formatNumberWithPeriods(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  }
+  const navigate = useNavigate();
 
   const formattedSalaryMin = formatNumberWithPeriods(salaryMin * 1000);
 
   const formattedSalaryMax = formatNumberWithPeriods(salaryMax * 1000);
 
+  const handleJobClick = () => {
+    navigate(`/job/${id}`);
+  };
+
   return (
-    <div style={{}}>
+    <div
+      style={{
+        cursor: 'pointer',
+      }}
+      onClick={handleJobClick}
+    >
       <Box
         sx={{
           border: 1,

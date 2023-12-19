@@ -9,24 +9,19 @@ import { baseURL } from '../../utils/baseUrl';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const companyData = {
-  email: 'itss2.hedspi@gmail.com',
-};
-
 const initValue =
   '<p><span>Chào [Tên Người Nhận],</span></p><p><span>Tôi là [Họ và Tên của Bạn], và tôi rất hứng thú với vị trí [Tên Vị Trí] mà công ty đang tuyển dụng, như đã được đăng tải trên trang web của bạn. Tôi tin rằng kinh nghiệm và kỹ năng của mình có thể làm cho tôi trở thành một người đóng góp có ý nghĩa cho đội ngũ của [Tên Công Ty].</span></p><p><span>Trân trọng,</span></p><p><span>[Họ và Tên của Bạn]</span></p><p><span>[Số Điện Thoại của Bạn]</span></p><p><span>[Địa chỉ Email của Bạn]</span></p>';
-const FormModal = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const FormModal = ({ isOpen, onClose, propData }) => {
+  const { jobId, jobTitle, companyEmail } = propData;
   const [editorValue, setEditorValue] = useState(initValue);
   const [file, setFile] = useState(null);
 
-  const job = {
-    title: 'Ứng tuyển vị trí thực tập sinh Nodejs',
+  const user = {
     id: 1,
   };
 
-  const user = {
-    id: 1,
+  const closeModal = () => {
+    onClose();
   };
 
   const handleFileChange = (event) => {
@@ -34,21 +29,15 @@ const FormModal = () => {
     setFile(selectedFile);
   };
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+  const subject = `Ứng tuyển vị trí ${jobTitle}`;
 
   const handleApply = () => {
     const formData = new FormData();
     formData.append('userId', user.id);
-    formData.append('subject', job.title);
-    formData.append('jobId', job.id);
+    formData.append('subject', subject);
+    formData.append('jobId', jobId);
     formData.append('mailContent', editorValue);
-    formData.append('companyEmail', companyData.email);
+    formData.append('companyEmail', companyEmail);
 
     if (file) {
       formData.append('file', file);
@@ -71,11 +60,9 @@ const FormModal = () => {
   return (
     <div>
       <ToastContainer />
-      <button onClick={openModal}>Mở Modal</button>
-
       <Modal
         isOpen={isOpen}
-        onRequestClose={closeModal}
+        onRequestClose={onClose}
         style={{
           content: {
             width: '40%',
@@ -100,7 +87,7 @@ const FormModal = () => {
             alignItems: 'center',
           }}
         >
-          <h2>Ứng tuyển công việc: XXXX</h2>
+          <h3>{subject}</h3>
           <button
             onClick={closeModal}
             style={{
