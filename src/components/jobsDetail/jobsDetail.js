@@ -44,7 +44,7 @@ const JobsDetail = ({ data }) => {
 
           <Grid item>
             <Box>
-              <JobCardDesc />
+              <JobCardDesc jobCardData={data} />
             </Box>
           </Grid>
         </Grid>
