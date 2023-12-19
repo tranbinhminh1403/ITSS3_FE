@@ -11,7 +11,7 @@ export default function HomePage() {
         <Header />
         <SearchBar />
         <JobsList />
-        <Footer />
+        <Footer marginTop={0}/>
       </div>
     </div>
   );

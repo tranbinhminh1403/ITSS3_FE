@@ -3,9 +3,9 @@ import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './styles.css';
 
-const Footer = () => {
+const Footer = ({ marginTop }) => {
   return (
-    <footer style={{ marginBottom: 0 }}>
+    <footer style={{ marginBottom: 0, marginTop: `${marginTop}px` }}>
       <div className="footer">
         <div className="footer-top">
           <div className="footer-left">
