@@ -8,6 +8,10 @@ import './jobsList.css';
 import formatNumberWithPeriods from '../../utils/formatNumber';
 import { calculateDayRemaining } from '../../utils/handleDate';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Pagination, PaginationItem } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const JobItem = ({ jobItem }) => {
   const navigate = useNavigate();
@@ -16,7 +20,7 @@ const JobItem = ({ jobItem }) => {
 
   const formattedSalaryMax = formatNumberWithPeriods(jobItem.salary_max * 1000);
 
-  const dayRemaining = calculateDayRemaining(jobItem.expired_at)
+  const dayRemaining = calculateDayRemaining(jobItem.expired_at);
 
   const handleButton = () => {
     navigate(`/job/${jobItem.id}`);
@@ -95,13 +99,43 @@ const JobItem = ({ jobItem }) => {
 };
 
 const JobResult = ({ propData }) => {
+  const resultPerPage = 6;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const indexOfLastJob = currentPage * resultPerPage;
+  const indexOfFirstJob = indexOfLastJob - resultPerPage;
+  const currentResults = propData.slice(indexOfFirstJob, indexOfLastJob);
+
+  const totalPages = Math.ceil(propData.length / resultPerPage);
+
+  const handlePageChange = (event, newPage) => {
+    setCurrentPage(newPage);
+  };
   return (
-    <div className="main-container">
-      <ul className="job-list">
-        {propData.map((jobItem, index) => (
-          <JobItem key={index} jobItem={jobItem} />
-        ))}
-      </ul>
+    <div>
+      <div className="main-container">
+        <ul className="job-list">
+          {currentResults.map((jobItem, index) => (
+            <JobItem key={index} jobItem={jobItem} />
+          ))}
+        </ul>
+      </div>
+      <div
+        style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
+      >
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+          color="primary"
+          renderItem={(item) => (
+            <PaginationItem
+              slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+              {...item}
+            />
+          )}
+        />
+      </div>
     </div>
   );
 };
