@@ -43,6 +43,7 @@
     /* position: absolute;*/
     bottom: 0;
     width: 100%;
+    margin-top: 40px;
     /* height: 425px; */     
     /* fix white space below footer */
   }
