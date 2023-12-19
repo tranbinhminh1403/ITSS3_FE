@@ -17,12 +17,13 @@
   .job-list-item {
     /* position: absolute; */
     top: 0;
-    width: 100%;
+    width: 98%;
     height: 132px;
     border: 2px solid #E4E5E8;
     border-radius: 10px;
     /* box-sizing: border-box; */
     margin-bottom: 30px;
+    margin-left: 34px;
   }
   
   .avt-company-img {
@@ -72,7 +73,6 @@
     border-radius: 52px;
     height: 26px;
     width: 116px;
-    margin-top: 10px;
     text-align: center;
     margin-left: 10px;
     /* margin-right: 10px; */
@@ -82,6 +82,8 @@
   .job-txt-1 {
     padding-top: 2px;
     color: #FF0000;
+    font-size: 14px;
+    font-weight: 400;
   }
   
   .job-fulltime {
@@ -89,7 +91,6 @@
     border-radius: 52px;
     height: 26px;
     width: 116px;
-    margin-top: 10px;
     text-align: center;
     margin-left: 10px;
     margin-right: 10px;
@@ -99,6 +100,8 @@
   .job-txt-2 {
     padding-top: 2px;
     color: #0A65CC;
+    font-size: 14px;
+    font-weight: 400;
   }
   
   .btn-sub {

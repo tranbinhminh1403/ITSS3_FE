@@ -35,7 +35,7 @@ const JobItem = ({ jobItem }) => {
             <div className="job-info-top" style={{ marginBottom: '8px' }}>
               <div
                 className="job-name"
-                style={{ fontSize: '28px', fontWeight: 500 }}
+                style={{ fontSize: '18px', fontWeight: 500 }}
               >
                 {jobItem.title}
               </div>
