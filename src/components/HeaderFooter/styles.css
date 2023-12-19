@@ -99,7 +99,7 @@
   
   .nav-item {
     width: 100px;
-    background-color: var(--background-color);
+    background-color: #ffffff;
     text-align: center;
     align-items: center;
     display: flex;
