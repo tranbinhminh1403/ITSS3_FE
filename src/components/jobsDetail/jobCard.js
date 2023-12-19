@@ -9,7 +9,6 @@ import { handleDate } from '../../utils/handleDate';
 import formatNumberWithPeriods from '../../utils/formatNumber';
 
 const JobCardDesc = ({ jobCardData }) => {
-  console.log(jobCardData);
   const createdDate = handleDate(jobCardData.updated_at);
 
   const expiredDate = handleDate(jobCardData.expired_at);

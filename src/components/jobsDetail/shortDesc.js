@@ -15,10 +15,12 @@ const ShortDesc = ({ data }) => {
     setIsModalOpen(true);
   };
   const expiredDate = handleDate(data.expired_at);
-  
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  console.log(data);
 
   const propData = {
     jobId: data.id,
@@ -49,13 +51,11 @@ const ShortDesc = ({ data }) => {
         }}
       >
         <Grid container spacing={2} style={{ marginLeft: 128 }}>
-          <Grid item xs={8}>
-            <Box sx={{ height: 96, width: 711 }}>
+          <Grid item xs={9.1}>
+            <Box sx={{ height: 96, width: 790 }}>
               <Grid container>
                 <Grid item xs={2}>
-                  <Box
-                    sx={{ width: 96, height: 96, border: 1, borderRadius: 50 }}
-                  >
+                  <Box sx={{ width: 96, height: 96 }}>
                     <img
                       src={data.company?.logo_url} // Replace with your actual image source
                       alt="Company Picture"
@@ -84,7 +84,7 @@ const ShortDesc = ({ data }) => {
                           {data.company?.hust_partner ? (
                             <Box
                               sx={{
-                                marginLeft: 2,
+                                marginLeft: 1,
                                 background: '#FEECED',
                                 color: 'red',
                                 border: 0,
@@ -101,29 +101,31 @@ const ShortDesc = ({ data }) => {
                             <></>
                           )}
                         </Grid>
-                        <Grid item>
-                          <Box
-                            sx={{
-                              marginLeft: 2,
-                              background: '#E8F1FF',
-                              color: 'blue',
-                              border: 0,
-                              borderRadius: 5,
-                              paddingTop: 0.5,
-                              paddingBottom: 0.5,
-                              paddingLeft: 1,
-                              paddingRight: 1,
-                            }}
-                          >
-                            {data.jobTypeRelations[0]?.type.name}
-                          </Box>
-                        </Grid>
+                        {data.jobTypeRelations?.map((jobType, index) => (
+                          <Grid item key={index}>
+                            <Box
+                              sx={{
+                                marginLeft: 1,
+                                background: '#E8F1FF',
+                                color: 'blue',
+                                border: 0,
+                                borderRadius: 5,
+                                paddingTop: 0.5,
+                                paddingBottom: 0.5,
+                                paddingLeft: 1,
+                                paddingRight: 1,
+                              }}
+                            >
+                              {jobType.type.name}
+                            </Box>
+                          </Grid>
+                        ))}
                       </Grid>
                     </Box>
-                    <Box sx={{ marginTop: 1 }}>
+                    <Box sx={{ marginTop: 2 }}>
                       <Grid container>
                         <Grid item>
-                          <Box sx={{ marginLeft: 1 }}>
+                          <Box>
                             <UrlSVG /> {data.company?.website}
                           </Box>
                         </Grid>
@@ -147,7 +149,7 @@ const ShortDesc = ({ data }) => {
             </Box>
           </Grid>
 
-          <Grid item xs={4}>
+          <Grid item>
             <Box sx={{ position: 'relative', height: 88, width: 248 }}>
               <Button
                 variant="contained"
@@ -167,7 +169,6 @@ const ShortDesc = ({ data }) => {
                   position: 'absolute',
                   bottom: 0,
                   right: 0,
-                  margin: '10px',
                 }}
               >
                 Ngày hết hạn:{' '}
