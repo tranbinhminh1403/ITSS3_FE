@@ -6,6 +6,7 @@ import { ReactComponent as ArrowRight } from '../../assets/arrowRight.svg';
 import { ReactComponent as IconAvt } from '../../assets/iconAvt.svg';
 import './jobsList.css';
 import formatNumberWithPeriods from '../../utils/formatNumber';
+import { calculateDayRemaining } from '../../utils/handleDate';
 import { useNavigate } from 'react-router-dom';
 
 const JobItem = ({ jobItem }) => {
@@ -14,6 +15,8 @@ const JobItem = ({ jobItem }) => {
   const formattedSalaryMin = formatNumberWithPeriods(jobItem.salary_min * 1000);
 
   const formattedSalaryMax = formatNumberWithPeriods(jobItem.salary_max * 1000);
+
+  const dayRemaining = calculateDayRemaining(jobItem.expired_at)
 
   const handleButton = () => {
     navigate(`/job/${jobItem.id}`);
@@ -75,7 +78,7 @@ const JobItem = ({ jobItem }) => {
                 className="job-time"
                 style={{ fontSize: '14px', color: '#636A80', fontWeight: 400 }}
               >
-                <CalendarSvg /> {jobItem.remainingDays} Days Remaining
+                <CalendarSvg /> {dayRemaining} Days Remaining
               </div>
             </div>
           </div>
