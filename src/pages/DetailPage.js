@@ -5,9 +5,10 @@ import Header from '../components/HeaderFooter/Header';
 import JobsDetail from '../components/jobsDetail/jobsDetail';
 import ShortDesc from '../components/jobsDetail/shortDesc';
 import { baseURL } from '../utils/baseUrl';
+import { useParams } from 'react-router-dom';
 
 export default function DetailPage() {
-  const id = 1;
+  const { id } = useParams();
   const [jobData, setJobData] = useState(null);
 
   useEffect(() => {
