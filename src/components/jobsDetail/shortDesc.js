@@ -9,7 +9,6 @@ import { useState } from 'react';
 
 const ShortDesc = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log(data);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);

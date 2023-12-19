@@ -70,7 +70,6 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
           'Content-Type': 'application/json',
         },
       });
-      console.log(response.data);
       if (response.data.length > 0) {
         navigate('result', { state: { data: response.data } });
       } else {
