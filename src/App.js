@@ -9,6 +9,7 @@ import FormPage from './pages/FormPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ErrorPage from './pages/ErrorPage';
+import DetailPage from './pages/DetailPage';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/upload" element={<FormPage />} />
             <Route path="*" element={<ErrorPage />} />
+            <Route path="/detail" element={<DetailPage />} />
           </Routes>
         </BrowserRouter>
 
