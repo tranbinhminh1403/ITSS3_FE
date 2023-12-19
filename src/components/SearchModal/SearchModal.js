@@ -10,6 +10,7 @@ import axios from 'axios';
 import { baseURL } from '../../utils/baseUrl';
 import RecJobs from '../jobsList/jobRec';
 import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
   const [selectedField, setSelectedField] = useState(fieldData[0]?.name);
@@ -35,6 +36,8 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
     remote: false,
   });
   const [isDomestic, setIsDomestic] = useState(true);
+
+  const navigate = useNavigate();
 
   const handleYearsOfExperienceChange = useCallback(
     (from, to) => {
@@ -69,20 +72,7 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
       });
       console.log(response.data);
       if (response.data.length > 0) {
-        response.data.map((job) => {
-          return (
-            <RecJobs
-              company={job.company.name}
-              hustPartner={job.company.hust_partner}
-              address={job.job_location}
-              jobTitle={job.title}
-              logo_url={job.company.logo_url}
-              jobType={job.jobTypeRelations[0]?.type.name}
-              salaryMin={job.salary_min}
-              salaryMax={job.salary_max}
-            />
-          );
-        });
+        navigate('result', { state: { data: response.data } });
       } else {
         alert('No jobs found');
       }

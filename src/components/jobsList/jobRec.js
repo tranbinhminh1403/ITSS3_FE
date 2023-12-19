@@ -1,7 +1,8 @@
 import { Box, Grid } from '@mui/material';
 import React from 'react';
 import PlaceIcon from '@mui/icons-material/Place';
-import { ReactComponent as IconSvg } from './icon.svg';
+import { ReactComponent as IconSvg } from '../../assets/icon.svg';
+import formatNumberWithPeriods from '../../utils/formatNumber';
 
 const RecJobs = (props) => {
   // Destructure the props to get the values
@@ -15,10 +16,6 @@ const RecJobs = (props) => {
     salaryMax,
     logo_url,
   } = props;
-
-  function formatNumberWithPeriods(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  }
 
   const formattedSalaryMin = formatNumberWithPeriods(salaryMin * 1000);
 
