@@ -157,22 +157,24 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
             </div>
           </div>
           <div className="col border-end pt-2 ">
-            <div className="input-group align-items-center">
-              <div className="form-check">
-                <p>Doanh nghiệp liên kết</p>
-                <div className="container">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="HUST_modal"
-                    checked={companyLink}
-                    onChange={(e) => setCompanyLink(e.target.checked)}
-                  />
-                  <label className="form-check-label" htmlFor="HUST_modal">
-                    HUST
-                  </label>
+            <div className="input-group ">
+              <div className="form-check d-flex align-items-center">
+                <div className="container d-flex align-items-center me-4">
+                  <p className='mt-2'>Doanh nghiệp liên kết</p>
                 </div>
+              </div>
+              <div className="form-check mt-2">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="HUST_modal"
+                  checked={companyLink}
+                  onChange={(e) => setCompanyLink(e.target.checked)}
+                />
+                <label className="form-check-label" htmlFor="HUST_modal">
+                  HUST
+                </label>
               </div>
             </div>
           </div>
