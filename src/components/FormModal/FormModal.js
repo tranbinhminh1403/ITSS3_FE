@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -15,6 +15,26 @@ const FormModal = ({ isOpen, onClose, propData }) => {
   const { jobId, jobTitle, companyEmail } = propData;
   const [editorValue, setEditorValue] = useState(initValue);
   const [file, setFile] = useState(null);
+  const [quillHeight, setQuillHeight] = useState(200);
+
+  useEffect(() => {
+    const editor = document.querySelector('.react-quill .ql-editor');
+    if (editor) {
+      setQuillHeight(editor.scrollHeight);
+    }
+  }, [editorValue]);
+
+  const updateModalHeight = () => {
+    if (quillHeight) {
+      const totalHeight = quillHeight + 315;
+      return {
+        content: {
+          height: totalHeight,
+        },
+      };
+    }
+    return {};
+  };
 
   const user = {
     id: 1,
@@ -50,6 +70,7 @@ const FormModal = ({ isOpen, onClose, propData }) => {
         },
       })
       .then((response) => {
+        closeModal();
         toast.success(`${response.data}`);
       })
       .catch((error) => {
@@ -65,14 +86,13 @@ const FormModal = ({ isOpen, onClose, propData }) => {
         onRequestClose={onClose}
         style={{
           content: {
-            width: '40%',
+            width: '50%',
             margin: 'auto',
-            height: '60%',
+            maxHeight: '90%',
             backgroundColor: 'white',
             borderRadius: '8px',
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)',
-            display: 'flex',
-            flexDirection: 'column', // To make child elements stack vertically
+            ...updateModalHeight().content,
           },
           overlay: {
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -88,18 +108,6 @@ const FormModal = ({ isOpen, onClose, propData }) => {
           }}
         >
           <h3>{subject}</h3>
-          <button
-            onClick={closeModal}
-            style={{
-              cursor: 'pointer',
-              background: 'none',
-              border: 'none',
-              fontSize: '3em',
-              color: 'blue',
-            }}
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         <p
           style={{
@@ -149,15 +157,17 @@ const FormModal = ({ isOpen, onClose, propData }) => {
           Lời nhắn đến nhà tuyển dụng
         </p>
         <ReactQuill
+          className="react-quill"
           value={editorValue}
           onChange={(value) => setEditorValue(value)}
-          style={{ marginBottom: '60px' }}
+          style={{
+            marginBottom: '30px',
+          }}
         />
         <div
           style={{
             display: 'flex',
             justifyContent: 'space-between',
-            marginTop: '10px',
           }}
         >
           <button
