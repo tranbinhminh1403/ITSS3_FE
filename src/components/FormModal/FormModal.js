@@ -70,6 +70,7 @@ const FormModal = ({ isOpen, onClose, propData }) => {
         },
       })
       .then((response) => {
+        closeModal();
         toast.success(`${response.data}`);
       })
       .catch((error) => {
