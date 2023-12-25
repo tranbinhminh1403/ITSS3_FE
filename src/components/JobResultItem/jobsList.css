@@ -1,7 +1,7 @@
 .main-container {
     position: relative;
     top: 40px;
-    width: 82%;
+    width: 81.5%;
     margin-left: 92px;
   }
   
@@ -23,7 +23,7 @@
     border-radius: 10px;
     /* box-sizing: border-box; */
     margin-bottom: 30px;
-    margin-left: 34px;
+    margin-left: 80px;  /* was 34px*/
   }
   
   .avt-company-img {
