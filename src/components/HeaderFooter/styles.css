@@ -105,11 +105,11 @@
     display: flex;
   }
   
-  .text-nav-1 {
+  .text-nav-sub {
     color: #0A65CC !important;
   }
   
-  .item-1 {
+  .item-sub {
     border-bottom: 2px solid #0A65CC;
   }
   
