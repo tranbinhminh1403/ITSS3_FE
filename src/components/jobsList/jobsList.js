@@ -37,17 +37,18 @@ const JobsList = () => {
   };
 
   return (
-    <div style={{ margin: '0 10%', marginTop: 30, marginBottom: 30 }}>
-      <div style={{ display: 'flex', flexWrap: 'wrap', minHeight: 600 }}>
+    <div style={{ margin: '0 9.5%', marginTop: 30, marginBottom: 30, marginRight: 100 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', minHeight: 600 }}> 
         {currentJobs?.map((job) => {
           return (
             <div
               key={job.id}
               style={{
-                flex: '0 0 31%',
+                flex: '0 0 30%',
                 margin: 10,
                 marginBottom: 20,
                 marginTop: 10,
+                marginLeft: 18,
               }}
             >
               <RecJobs
@@ -70,6 +71,7 @@ const JobsList = () => {
         style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
       >
         <Pagination
+        sx={{paddingBottom: 6}}
           count={totalPages}
           page={currentPage}
           onChange={handlePageChange}

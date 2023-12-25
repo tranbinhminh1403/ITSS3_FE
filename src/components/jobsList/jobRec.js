@@ -42,8 +42,8 @@ const RecJobs = (props) => {
           borderRadius: 2,
           borderColor: '#FFFFFF',
           boxShadow: 5,
-          width: 380,
-          height: 190,
+          width: 470,
+          height: 200,
           flexGrow: 1,
           background: '#FFFFFF',
           '&:hover': {
