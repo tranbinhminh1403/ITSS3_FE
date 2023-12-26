@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage';
 import ErrorPage from './pages/ErrorPage';
 import DetailPage from './pages/DetailPage';
 import Result from './pages/Result';
+import AppliedPage from './pages/ApplyPage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="*" element={<ErrorPage />} />
             <Route path="/job/:id" element={<DetailPage />} />
             <Route path="/result" element={<Result />} />
+            <Route path="/applied" element={<AppliedPage />} />
           </Routes>
         </BrowserRouter>
       </div>

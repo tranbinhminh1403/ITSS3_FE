@@ -33,7 +33,7 @@ const Header = ({ activeNav }) => {
             </p>
           </a>
           <a
-            href=""
+            href="/applied"
             className={`nav-item ${activeNav === 2 ? 'item-sub' : ''}`}
           >
             <p className={`text-nav ${activeNav === 2 ? 'text-nav-sub' : ''}`}>
