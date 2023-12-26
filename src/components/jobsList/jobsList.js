@@ -4,13 +4,10 @@ import RecJobs from './jobRec';
 import { Pagination, PaginationItem } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import axios from 'axios';
-import { baseURL } from '../../utils/baseUrl';
 
-const JobsList = () => {
+const JobsList = ({ jobsList }) => {
   const jobsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
-  const [jobsList, setJobsList] = useState([]);
 
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
@@ -20,20 +17,6 @@ const JobsList = () => {
 
   const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage);
-  };
-
-  useEffect(() => {
-    getJobData();
-  }, []);
-
-  const getJobData = async () => {
-    try {
-      const response = await axios.get(`${baseURL}jobs`);
-      const jobs = response.data;
-      setJobsList(jobs);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (
