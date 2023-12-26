@@ -24,7 +24,7 @@ const Header = () => {
             {' '}
             <p className="text-nav">Tìm việc</p>{' '}
           </a>
-          <a href="" className="nav-item">
+          <a href="/applied" className="nav-item">
             {' '}
             <p className="text-nav">Đã ứng tuyển</p>{' '}
           </a>
