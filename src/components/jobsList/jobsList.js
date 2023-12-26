@@ -37,8 +37,15 @@ const JobsList = () => {
   };
 
   return (
-    <div style={{ margin: '0 9.5%', marginTop: 30, marginBottom: 30, marginRight: 100 }}>
-      <div style={{ display: 'flex', flexWrap: 'wrap', minHeight: 600 }}> 
+    <div
+      style={{
+        margin: '0 9.5%',
+        marginTop: 30,
+        marginBottom: 30,
+        marginRight: 100,
+      }}
+    >
+      <div style={{ display: 'flex', flexWrap: 'wrap', minHeight: 600 }}>
         {currentJobs?.map((job) => {
           return (
             <div
@@ -71,7 +78,7 @@ const JobsList = () => {
         style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
       >
         <Pagination
-        sx={{paddingBottom: 6}}
+          sx={{ paddingBottom: 6 }}
           count={totalPages}
           page={currentPage}
           onChange={handlePageChange}

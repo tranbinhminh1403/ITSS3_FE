@@ -39,7 +39,7 @@ const ShortDesc = ({ data }) => {
           alignItems: 'center',
         }}
       >
-        <div style={{ marginLeft: 140, fontWeight: 600, fontSize: 21 }}>
+        <div style={{ marginLeft: 200, fontWeight: 600, fontSize: 21 }}>
           Chi tiết công việc
         </div>
       </Box>
@@ -50,7 +50,7 @@ const ShortDesc = ({ data }) => {
           alignItems: 'center',
         }}
       >
-        <Grid container spacing={2} style={{ marginLeft: 128 }}>
+        <Grid container spacing={2} style={{ marginLeft: 190 }}>
           <Grid item xs={9.1}>
             <Box sx={{ height: 96, width: 790 }}>
               <Grid container>
