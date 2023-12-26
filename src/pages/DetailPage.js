@@ -32,11 +32,11 @@ export default function DetailPage() {
   return (
     <div className="App">
       <div className="body">
-        <Header />
+        <Header activeNav={1} />
         <ShortDesc data={jobData} />
         <JobsDetail data={jobData} />
         <div className="spacer" style={{ flex: 1 }} />
-        <Footer marginTop={300}/>
+        <Footer marginTop={300} />
       </div>
     </div>
   );

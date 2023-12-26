@@ -26,8 +26,8 @@ const JobsDetail = ({ data }) => {
           justifyContent: 'space-between',
         }}
       >
-        <Grid container spacing={7} style={{ marginLeft: 90 }}>
-          <Grid item xs={6.5}>
+        <Grid container spacing={7} style={{ marginLeft: 150 }}>
+          <Grid item xs={7}>
             <Grid item xs={4} sx={{ fontSize: 18, fontWeight: 500 }}>
               <Box sx={{ marginBottom: '10px' }}>Nội dung công việc</Box>
             </Grid>

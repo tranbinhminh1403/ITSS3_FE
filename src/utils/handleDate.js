@@ -2,7 +2,7 @@ export const handleDate = (date) => {
   const originalDate = new Date(date);
 
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  const formattedDate = originalDate.toLocaleDateString('en-US', options);
+  const formattedDate = originalDate.toLocaleDateString('vi-VN', options);
   return formattedDate;
 };
 

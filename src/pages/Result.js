@@ -9,10 +9,10 @@ export default function Result() {
   const { data } = location.state;
   return (
     <div>
-      <Header />
+      <Header activeNav={1} />
       <SearchBar />
       <JobResult propData={data} />
-      <Footer marginTop={20}/>
+      <Footer marginTop={20} />
     </div>
   );
 }

@@ -1,11 +1,11 @@
 // Header.js
-import React from 'react';
+import React, { useState } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import avatar from '../../assets/images/avt-hung.jpg'
+import avatar from '../../assets/images/avt-hung.jpg';
 import './styles.css';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ activeNav }) => {
   return (
     <header className="header">
       <nav className="header-nav">
@@ -16,25 +16,33 @@ const Header = () => {
           </a>
         </div>
         <ul className="nav-list">
-          <a href="/" className="nav-item item-1">
-            {' '}
-            <p className="text-nav text-nav-1 ">Trang chủ</p>{' '}
+          <a
+            href="/"
+            className={`nav-item ${activeNav === 0 ? 'item-sub' : ''}`}
+          >
+            <p className={`text-nav ${activeNav === 0 ? 'text-nav-sub' : ''}`}>
+              Trang chủ
+            </p>
           </a>
-          <a href="" className="nav-item item-2">
-            {' '}
-            <p className="text-nav">Tìm việc</p>{' '}
+          <a
+            href=""
+            className={`nav-item item-2 ${activeNav === 1 ? 'item-sub' : ''}`}
+          >
+            <p className={`text-nav ${activeNav === 1 ? 'text-nav-sub' : ''}`}>
+              Tìm việc
+            </p>
           </a>
-          <a href="/applied" className="nav-item">
-            {' '}
-            <p className="text-nav">Đã ứng tuyển</p>{' '}
+          <a
+            href=""
+            className={`nav-item ${activeNav === 2 ? 'item-sub' : ''}`}
+          >
+            <p className={`text-nav ${activeNav === 2 ? 'text-nav-sub' : ''}`}>
+              Đã ứng tuyển
+            </p>
           </a>
         </ul>
         <div className="user-avt">
-          <img
-            src={avatar}
-            alt="avatar user"
-            className="avt-img"
-          />
+          <img src={avatar} alt="avatar user" className="avt-img" />
         </div>
       </nav>
     </header>
