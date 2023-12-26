@@ -42,8 +42,8 @@ const RecJobs = (props) => {
           borderRadius: 2,
           borderColor: '#FFFFFF',
           boxShadow: 5,
-          width: 380,
-          height: 190,
+          width: 470,
+          height: 200,
           flexGrow: 1,
           background: '#FFFFFF',
           '&:hover': {
@@ -73,7 +73,7 @@ const RecJobs = (props) => {
           </Grid>
           <Grid item xs={8} sx={{ marginTop: 2.5, marginLeft: 1 }}>
             <Grid container>
-              <Grid item xs={4} sx={{ fontSize: 16, fontWeight: 500 }}>
+              <Grid item xs={4} sx={{ fontSize: 19, fontWeight: 500 }}>
                 <Box sx={{ marginLeft: 0, textAlign: 'left' }}>{company}</Box>
               </Grid>
 
@@ -129,10 +129,12 @@ const RecJobs = (props) => {
             </Box>
           </Grid>
           <Grid item xs={4.5}>
-            <Box sx={{ textAlign: 'left', marginLeft: 3.5 }}>{jobType}</Box>
+            <Box sx={{ textAlign: 'left', marginLeft: 3.5, fontSize: 16 }}>
+              {jobType}
+            </Box>
           </Grid>
           <Grid item xs={7.5}>
-            <Box sx={{ textAlign: 'left' }}>
+            <Box sx={{ textAlign: 'left', fontSize: 16 }}>
               {formattedSalaryMin} VND - {formattedSalaryMax} VND
             </Box>
           </Grid>

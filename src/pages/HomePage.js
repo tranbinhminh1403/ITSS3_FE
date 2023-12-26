@@ -8,10 +8,10 @@ export default function HomePage() {
   return (
     <div className="App">
       <div className="body">
-        <Header />
+        <Header activeNav={0} />
         <SearchBar />
         <JobsList />
-        <Footer marginTop={0}/>
+        <Footer marginTop={0} />
       </div>
     </div>
   );
