@@ -72,13 +72,7 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
           'Content-Type': 'application/json',
         },
       });
-      if (response.data.length > 0) {
-        navigate('result', { state: { data: response.data } });
-      } else {
-        toast.error('Không tìm thấy job', {
-          autoClose: 1500, 
-        });
-          }
+      navigate('result', { state: { data: response.data } });
     } catch (error) {
       console.log(error);
     }
