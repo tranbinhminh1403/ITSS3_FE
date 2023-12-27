@@ -30,14 +30,24 @@ const SearchBar = ({ onSearchResponse }) => {
 
   const handleHustPartnerChange = async (event) => {
     const isChecked = event.target.checked;
-    try {
-      await axios
-        .get(`${baseURL}jobs/hust-partner?hust_partner=${isChecked}`)
-        .then((response) => {
+    if (!isChecked) {
+      try {
+        await axios.get(`${baseURL}jobs`).then((response) => {
           onSearchResponse(response.data);
         });
-    } catch (error) {
-      console.error('Error sending HUST partner request:', error);
+      } catch (error) {
+        console.error('Error sending HUST partner request:', error);
+      }
+    } else {
+      try {
+        await axios
+          .get(`${baseURL}jobs/hust-partner?hust_partner=${isChecked}`)
+          .then((response) => {
+            onSearchResponse(response.data);
+          });
+      } catch (error) {
+        console.error('Error sending HUST partner request:', error);
+      }
     }
   };
 
