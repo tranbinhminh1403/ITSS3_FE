@@ -111,33 +111,46 @@ const JobResult = ({ propData }) => {
   const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage);
   };
-  return (
-    <div>
-      <div className="main-container">
-        <ul className="job-list">
-          {currentResults.map((jobItem, index) => (
-            <JobItem key={index} jobItem={jobItem} />
-          ))}
-        </ul>
+
+  if (propData.length <= 0) {
+    return (
+      <div>
+        <h3>Không tìm thấy công việc phù hợp</h3>
       </div>
-      <div
-        style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
-      >
-        <Pagination
-          count={totalPages}
-          page={currentPage}
-          onChange={handlePageChange}
-          color="primary"
-          renderItem={(item) => (
-            <PaginationItem
-              slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-              {...item}
-            />
-          )}
-        />
+    );
+  } else {
+    return (
+      <div>
+        <div className="main-container">
+          <ul className="job-list">
+            {currentResults.map((jobItem, index) => (
+              <JobItem key={index} jobItem={jobItem} />
+            ))}
+          </ul>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '20px',
+          }}
+        >
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={handlePageChange}
+            color="primary"
+            renderItem={(item) => (
+              <PaginationItem
+                slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+                {...item}
+              />
+            )}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default JobResult;
