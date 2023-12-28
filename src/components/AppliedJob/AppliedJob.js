@@ -1,24 +1,21 @@
-import { Icon, Pagination, PaginationItem } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { ReactComponent as IconSvg } from '../../assets/icon.svg';
-import { ReactComponent as DolarSvg } from '../../assets/dolar.svg';
-import { ReactComponent as CalendarSvg } from '../../assets/calendar.svg';
-import { ReactComponent as ArrowRight } from '../../assets/arrowRight.svg';
-import formatNumberWithPeriods from '../../utils/formatNumber';
 import CheckIcon from '@mui/icons-material/Check';
+import { Box, Pagination, PaginationItem } from '@mui/material';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ReactComponent as DolarSvg } from '../../assets/dolar.svg';
+import { ReactComponent as IconSvg } from '../../assets/icon.svg';
+import formatNumberWithPeriods from '../../utils/formatNumber';
 import { handleDate } from '../../utils/handleDate';
 import './style.css';
 
 const JobItem = ({ jobItem }) => {
   const formattedSalaryMin = formatNumberWithPeriods(
-    (jobItem && jobItem.job_id.salary_min ? jobItem.job_id.salary_min : 0) *
-      1000,
+    jobItem && jobItem.job_id.salary_min ? jobItem.job_id.salary_min : 0,
   );
   const formattedSalaryMax = formatNumberWithPeriods(
-    (jobItem && jobItem.job_id.salary_max ? jobItem.job_id.salary_max : 0) *
-      1000,
+    jobItem && jobItem.job_id.salary_max ? jobItem.job_id.salary_max : 0,
   );
 
   return (
@@ -95,69 +92,79 @@ const AppliedJob = ({ data }) => {
   };
 
   return (
-    <div>
+    <>
       <div className="applied-job-container">
-        <h5
-          style={{
+        <Box
+          sx={{
+            width: '100%',
+            height: 76,
+            backgroundColor: '#F1F2F4',
             textAlign: 'left',
-            marginBottom: '20px',
-            fontSize: 20,
-            fontWeight: '500',
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: '40px',
+            padding: '0 10%',
           }}
         >
-          Công việc đã ứng tuyển{' '}
-          <span>({data && data.length ? data.length : 0})</span>
-        </h5>
-        <table className="table">
-          <thead
-            className="table-light"
-            style={{ fontSize: 15, fontWeight: '400' }}
-          >
-            <tr>
-              <th
-                scope="col"
-                style={{ textAlign: 'left', paddingLeft: '24px' }}
-              >
-                Công việc
-              </th>
-              <th scope="col">Ngày ứng tuyển</th>
-              <th scope="col">Trạng thái</th>
-              <th scope="col">Thao tác</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentResults.map((jobItem, index) => (
+          <div style={{ fontWeight: 500, fontSize: 20 }}>
+            Công việc đã ứng tuyển{' '}
+            <span>({data && data.length ? data.length : 0})</span>
+          </div>
+        </Box>
+        <div className="table-container">
+          <table className="table">
+            <thead
+              className="table-light"
+              style={{ fontSize: 15, fontWeight: '400' }}
+            >
               <tr>
-                <th>
-                  <JobItem jobItem={jobItem}></JobItem>
-                </th>
-                <td style={{ verticalAlign: 'middle' }}>
-                  {handleDate(jobItem.apply_at)}
-                </td>
-                <td
-                  style={{
-                    verticalAlign: 'middle',
-                    color: 'green',
-                    fontWeight: '700',
-                  }}
+                <th
+                  scope="col"
+                  style={{ textAlign: 'left', paddingLeft: '24px' }}
                 >
-                  <CheckIcon></CheckIcon>Đã gửi CV
-                </td>
-                <td style={{ verticalAlign: 'middle' }}>
-                  <button type="button" className="btn btn-primary">
-                    Xem chi tiết
-                  </button>
-                </td>
+                  Công việc
+                </th>
+                <th scope="col">Ngày ứng tuyển</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Thao tác</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {currentResults.map((jobItem, index) => (
+                <tr>
+                  <th>
+                    <JobItem jobItem={jobItem}></JobItem>
+                  </th>
+                  <td style={{ verticalAlign: 'middle' }}>
+                    {handleDate(jobItem.apply_at)}
+                  </td>
+                  <td
+                    style={{
+                      verticalAlign: 'middle',
+                      color: 'green',
+                      fontWeight: '700',
+                    }}
+                  >
+                    <CheckIcon></CheckIcon>Đã gửi CV
+                  </td>
+                  <td style={{ verticalAlign: 'middle' }}>
+                    <Link to={`/job/${jobItem.id}`}>
+                      <button type="button" className="btn btn-primary">
+                        Xem chi tiết
+                      </button>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       <div
         style={{
           display: 'flex',
           justifyContent: 'center',
-          marginTop: '600px',
+          marginTop: '60px',
         }}
       >
         <Pagination
@@ -173,7 +180,7 @@ const AppliedJob = ({ data }) => {
           )}
         />
       </div>
-    </div>
+    </>
   );
 };
 

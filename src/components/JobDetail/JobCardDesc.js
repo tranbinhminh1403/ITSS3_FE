@@ -1,38 +1,34 @@
 import { Box, Grid } from '@mui/material';
 import React from 'react';
+import formatNumberWithPeriods from '../../utils/formatNumber';
+import { handleDate } from '../../utils/handleDate';
 import { ReactComponent as Icon11 } from './icon/icon11.svg';
 import { ReactComponent as Icon12 } from './icon/icon12.svg';
 import { ReactComponent as Icon13 } from './icon/icon13.svg';
 import { ReactComponent as Icon21 } from './icon/icon21.svg';
 import { ReactComponent as Icon22 } from './icon/icon22.svg';
-import { handleDate } from '../../utils/handleDate';
-import formatNumberWithPeriods from '../../utils/formatNumber';
 
 const JobCardDesc = ({ jobCardData }) => {
   const createdDate = handleDate(jobCardData.updated_at);
 
   const expiredDate = handleDate(jobCardData.expired_at);
 
-  const formattedSalaryMin = formatNumberWithPeriods(
-    jobCardData.salary_min * 1000,
-  );
+  const formattedSalaryMin = formatNumberWithPeriods(jobCardData.salary_min);
 
-  const formattedSalaryMax = formatNumberWithPeriods(
-    jobCardData.salary_max * 1000,
-  );
+  const formattedSalaryMax = formatNumberWithPeriods(jobCardData.salary_max);
 
   return (
     <Box
       sx={{
-        height: 475,
-        width: 536,
+        height: 400,
+        width: 500,
         border: 2,
         borderColor: '#E7F0FA',
         borderRadius: '8px',
-        padding: '32px',
+        padding: '16px 24px',
       }}
     >
-      <Box sx={{ width: 55, height: 32, fontSize: 20, fontWeight: 500 }}>
+      <Box sx={{ width: 55, height: 32, fontSize: 18, fontWeight: 700 }}>
         Mô tả
       </Box>
       <Grid container sx={{ marginTop: 3, display: 'flex' }}>
@@ -42,7 +38,7 @@ const JobCardDesc = ({ jobCardData }) => {
             sx={{
               flexDirection: 'column',
               alignItems: 'flex-start',
-              minHeight: 110,
+              minHeight: 80,
             }}
           >
             <Icon11 />
@@ -58,7 +54,7 @@ const JobCardDesc = ({ jobCardData }) => {
             sx={{
               flexDirection: 'column',
               alignItems: 'flex-start',
-              minHeight: 110,
+              minHeight: 80,
             }}
           >
             <Icon12 />
@@ -74,7 +70,7 @@ const JobCardDesc = ({ jobCardData }) => {
             sx={{
               flexDirection: 'column',
               alignItems: 'flex-start',
-              minHeight: 110,
+              minHeight: 80,
             }}
           >
             <Icon13 />
@@ -93,7 +89,7 @@ const JobCardDesc = ({ jobCardData }) => {
             sx={{
               flexDirection: 'column',
               alignItems: 'flex-start',
-              minHeight: 110,
+              minHeight: 80,
             }}
           >
             <Icon21 />
@@ -111,7 +107,7 @@ const JobCardDesc = ({ jobCardData }) => {
             sx={{
               flexDirection: 'column',
               alignItems: 'flex-start',
-              minHeight: 110,
+              minHeight: 80,
             }}
           >
             <Icon22 />
@@ -129,7 +125,7 @@ const JobCardDesc = ({ jobCardData }) => {
             sx={{
               flexDirection: 'column',
               alignItems: 'flex-start',
-              minHeight: 110,
+              minHeight: 80,
             }}
           >
             <Icon13 />
@@ -148,7 +144,7 @@ const JobCardDesc = ({ jobCardData }) => {
             sx={{
               flexDirection: 'column',
               alignItems: 'flex-start',
-              minHeight: 110,
+              minHeight: 80,
             }}
           >
             <Icon13 />
@@ -166,7 +162,7 @@ const JobCardDesc = ({ jobCardData }) => {
             sx={{
               flexDirection: 'column',
               alignItems: 'flex-start',
-              minHeight: 110,
+              minHeight: 80,
             }}
           >
             <Icon13 />
@@ -184,7 +180,7 @@ const JobCardDesc = ({ jobCardData }) => {
             sx={{
               flexDirection: 'column',
               alignItems: 'flex-start',
-              minHeight: 110,
+              minHeight: 80,
             }}
           >
             <Icon13 />

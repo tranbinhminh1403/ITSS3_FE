@@ -1,24 +1,22 @@
-import React from 'react';
-import { ReactComponent as IconSvg } from '../../assets/icon.svg';
-import { ReactComponent as DolarSvg } from '../../assets/dolar.svg';
-import { ReactComponent as CalendarSvg } from '../../assets/calendar.svg';
-import { ReactComponent as ArrowRight } from '../../assets/arrowRight.svg';
-import { ReactComponent as IconAvt } from '../../assets/iconAvt.svg';
-import './jobsList.css';
-import formatNumberWithPeriods from '../../utils/formatNumber';
-import { calculateDayRemaining } from '../../utils/handleDate';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { Pagination, PaginationItem } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Pagination, PaginationItem } from '@mui/material';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ReactComponent as ArrowRight } from '../../assets/arrowRight.svg';
+import { ReactComponent as CalendarSvg } from '../../assets/calendar.svg';
+import { ReactComponent as DolarSvg } from '../../assets/dolar.svg';
+import { ReactComponent as IconSvg } from '../../assets/icon.svg';
+import formatNumberWithPeriods from '../../utils/formatNumber';
+import { calculateDayRemaining } from '../../utils/handleDate';
+import './jobsList.css';
 
 const JobItem = ({ jobItem }) => {
   const navigate = useNavigate();
 
-  const formattedSalaryMin = formatNumberWithPeriods(jobItem.salary_min * 1000);
+  const formattedSalaryMin = formatNumberWithPeriods(jobItem.salary_min);
 
-  const formattedSalaryMax = formatNumberWithPeriods(jobItem.salary_max * 1000);
+  const formattedSalaryMax = formatNumberWithPeriods(jobItem.salary_max);
 
   const dayRemaining = calculateDayRemaining(jobItem.expired_at);
 
@@ -28,7 +26,7 @@ const JobItem = ({ jobItem }) => {
 
   return (
     <li className="job-list-item">
-      <div className="job-detail">
+      <div className="result-job-detail">
         <div className="job-detail-left">
           <div className="avt-company">
             {/* <IconAvt/> */}
@@ -42,7 +40,11 @@ const JobItem = ({ jobItem }) => {
             <div className="job-info-top" style={{ marginBottom: '8px' }}>
               <div
                 className="job-name"
-                style={{ fontSize: '18px', fontWeight: 500 }}
+                style={{
+                  fontSize: '16px',
+                  fontWeight: 600,
+                  marginRight: '8px',
+                }}
               >
                 {jobItem.title}
               </div>
@@ -87,12 +89,10 @@ const JobItem = ({ jobItem }) => {
             </div>
           </div>
         </div>
-        <div className="job-detail-right">
-          <button className="btn-sub" onClick={handleButton}>
-            <p className="btn-txt">Xem chi tiết</p>
-            <ArrowRight />
-          </button>
-        </div>
+        <button className="result-btn-sub" onClick={handleButton}>
+          <p className="btn-txt">Xem chi tiết</p>
+          <ArrowRight />
+        </button>
       </div>
     </li>
   );
@@ -114,8 +114,20 @@ const JobResult = ({ propData }) => {
 
   if (propData.length <= 0) {
     return (
-      <div>
-        <h3>Không tìm thấy công việc phù hợp</h3>
+      <div className="notfound-container">
+        <h3>Không tìm thấy công việc phù hợp!</h3>
+        <Link
+          to="/"
+          style={{
+            width: 200,
+            alignSelf: 'center',
+            marginTop: 20,
+            marginBottom: 20,
+          }}
+          className="btn btn-primary"
+        >
+          Quay lại
+        </Link>
       </div>
     );
   } else {
