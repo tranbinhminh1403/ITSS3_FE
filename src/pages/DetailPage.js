@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Footer from '../components/HeaderFooter/Footer';
 import Header from '../components/HeaderFooter/Header';
 import JobsDetail from '../components/jobsDetail/jobsDetail';
 import ShortDesc from '../components/jobsDetail/shortDesc';
 import { baseURL } from '../utils/baseUrl';
-import { useParams } from 'react-router-dom';
 
 export default function DetailPage() {
   const { id } = useParams();
@@ -32,7 +32,7 @@ export default function DetailPage() {
   return (
     <div className="App">
       <div className="body">
-        <Header activeNav={1} />
+        <Header />
         <ShortDesc data={jobData} />
         <JobsDetail data={jobData} />
         <div className="spacer" style={{ flex: 1 }} />

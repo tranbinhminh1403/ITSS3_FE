@@ -1,8 +1,7 @@
 // Footer.js
-import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import React from 'react';
 import './styles.css';
-
 const Footer = ({ marginTop }) => {
   return (
     <footer style={{ marginBottom: 0, marginTop: `${marginTop}px` }}>
@@ -19,10 +18,10 @@ const Footer = ({ marginTop }) => {
                 </div>
               </li>
               <li className="text-footer text-footer-1">
-                Số điện thoại:{' '}
+                Số điện thoại:
                 <span className="phone-number">024 3869 6099</span>
               </li>
-              <li className="text-footer text-footer-2">
+              <li className="text-footer text-footer-1">
                 1 Đại Cồ Việt, Bách Khoa, Hai Bà Trưng, Hà Nội
               </li>
             </ul>

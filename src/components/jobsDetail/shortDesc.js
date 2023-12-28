@@ -1,15 +1,16 @@
-import { Box, Button, Grid } from '@mui/material';
-import React from 'react';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { ReactComponent as UrlSVG } from './url.svg';
-import { ReactComponent as PhoneSVG } from './phone.svg';
-import { ReactComponent as MailSVG } from './mail.svg';
-import FormModal from '../FormModal/FormModal';
-import { useState } from 'react';
+import { Box, Button, Grid } from '@mui/material';
+import React, { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { appliedJobState } from '../../recoil/appliedJobState';
 import { handleDate } from '../../utils/handleDate';
-
+import FormModal from '../FormModal/FormModal';
+import { ReactComponent as MailSVG } from './mail.svg';
+import { ReactComponent as PhoneSVG } from './phone.svg';
+import { ReactComponent as UrlSVG } from './url.svg';
 const ShortDesc = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const appliedJobs = useRecoilValue(appliedJobState);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -20,7 +21,7 @@ const ShortDesc = ({ data }) => {
     setIsModalOpen(false);
   };
 
-  console.log(data);
+  const isApplied = appliedJobs.find((job) => job.id === data.id);
 
   const propData = {
     jobId: data.id,
@@ -148,7 +149,6 @@ const ShortDesc = ({ data }) => {
               </Grid>
             </Box>
           </Grid>
-
           <Grid item>
             <Box sx={{ position: 'relative', height: 88, width: 248 }}>
               <Button
@@ -158,11 +158,21 @@ const ShortDesc = ({ data }) => {
                   height: 50,
                   fontSize: 14,
                   textTransform: 'none',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
                 onClick={handleOpenModal}
+                disabled={isApplied}
               >
-                {' '}
-                Ứng Tuyển Ngay <ArrowForwardIcon sx={{ marginLeft: 2 }} />
+                {isApplied ? (
+                  <span>Đã ứng tuyển</span>
+                ) : (
+                  <>
+                    <span>Ứng Tuyển Ngay</span>
+                    <ArrowForwardIcon sx={{ marginLeft: 2 }} />
+                  </>
+                )}
               </Button>
               <div
                 style={{

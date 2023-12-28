@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import jobData from './testData.json'; //test data
-import RecJobs from './jobRec';
-import { Pagination, PaginationItem } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Pagination, PaginationItem } from '@mui/material';
+import React, { useState } from 'react';
+import RecJobs from './jobRec';
 
 const JobsList = ({ jobsList }) => {
   const jobsPerPage = 12;
@@ -22,10 +21,9 @@ const JobsList = ({ jobsList }) => {
   return (
     <div
       style={{
-        margin: '0 9.5%',
-        marginTop: 30,
+        margin: '0 10%',
+        marginTop: 40,
         marginBottom: 30,
-        marginRight: 100,
       }}
     >
       <div style={{ display: 'flex', flexWrap: 'wrap', minHeight: 600 }}>

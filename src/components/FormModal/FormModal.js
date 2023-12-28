@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { BsArrowRight } from 'react-icons/bs';
 import Modal from 'react-modal';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { BsArrowRight } from 'react-icons/bs';
-import { ReactComponent as UploadIcon } from '../../assets/upload.svg';
-import axios from 'axios';
-import { baseURL } from '../../utils/baseUrl';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import loadingGif from '../../assets/Spinner-1s-200px.gif';
+import { ReactComponent as UploadIcon } from '../../assets/upload.svg';
+import { baseURL } from '../../utils/baseUrl';
 
 const initValue =
   '<p><span>Chào [Tên Người Nhận],</span></p><p><span>Tôi là [Họ và Tên của Bạn], và tôi rất hứng thú với vị trí [Tên Vị Trí] mà công ty đang tuyển dụng, như đã được đăng tải trên trang web của bạn. Tôi tin rằng kinh nghiệm và kỹ năng của mình có thể làm cho tôi trở thành một người đóng góp có ý nghĩa cho đội ngũ của [Tên Công Ty].</span></p><p><span>Trân trọng,</span></p><p><span>[Họ và Tên của Bạn]</span></p><p><span>[Số Điện Thoại của Bạn]</span></p><p><span>[Địa chỉ Email của Bạn]</span></p>';
