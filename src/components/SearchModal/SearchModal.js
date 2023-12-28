@@ -1,102 +1,117 @@
 // SearchModal.js
-import React from 'react';
-import Modal from 'react-modal';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import DoubleScrollBar from '../DoubleScrollBar/DoubleScrollBar';
-import './SearchModal.css';
-import { useState, useEffect } from 'react';
+import Checkbox from '@mui/material/Checkbox';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import Slider from '@mui/material/Slider';
 import axios from 'axios';
-import { baseURL } from '../../utils/baseUrl';
-import RecJobs from '../jobsList/jobRec';
-import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useEffect, useState } from 'react';
+import Modal from 'react-modal';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRecoilState, useResetRecoilState } from 'recoil';
+import { searchConditionState } from '../../recoil/searchConditionState';
+import { baseURL } from '../../utils/baseUrl';
+import './SearchModal.css';
+const DEFAULT_FIELD_VALUE = 'all';
+const DEFAULT_SALARY_VALUE = 1000000;
 
-const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
-  const [selectedField, setSelectedField] = useState(fieldData[0]?.name);
-  const [majorsList, setMajorsList] = useState(fieldData[0]?.name);
-  const [selectedMajor, setSelectedMajor] = useState(
-    fieldData[0]?.majors[0]?.name,
-  );
-  const [jobKeyword, setJobKeyword] = useState('');
-  const [location, setLocation] = useState('');
-  const [companyLink, setCompanyLink] = useState(false);
-  const [filterData, setFilterData] = useState([]);
-  const [yearsOfExperienceRange, setYearsOfExperienceRange] = useState({
-    min: 0,
-    max: 5,
-  });
-  const [salaryRange, setSalaryRange] = useState({ min: 0, max: 40 });
-  const [jobType, setJobType] = useState([]);
-  const [checked, setChecked] = useState({
-    all: false,
-    partTime: false,
-    fullTime: false,
-    internship: false,
-    remote: false,
-  });
-  const [isDomestic, setIsDomestic] = useState(true);
-
+const SearchModal = ({ isOpen, onRequestClose }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchOption, setSearchOption] = useRecoilState(searchConditionState);
+  const resetConditions = useResetRecoilState(searchConditionState);
+  const [fieldData, setFieldData] = useState([]);
+  const [majorsList, setMajorsList] = useState([]);
+  const refFieldSelection = React.useRef();
+  const refMajorSelection = React.useRef();
 
-  const handleYearsOfExperienceChange = useCallback(
-    (from, to) => {
-      setYearsOfExperienceRange({ min: from, max: to });
-    },
-    [setYearsOfExperienceRange],
-  );
-
-  const handleSalaryChange = useCallback(
-    (from, to) => {
-      setSalaryRange({ min: from, max: to });
-    },
-    [setSalaryRange],
-  );
+  useEffect(() => {
+    const fetchFieldData = async () => {
+      try {
+        const response = await axios.get(`${baseURL}fields`);
+        setFieldData(response.data);
+        setMajorsList(response.data.flatMap((field) => field.majors));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchFieldData();
+  }, []);
 
   const handleSearch = async () => {
-    const searchData = {
-      field: selectedField,
-      major: selectedMajor,
-      hust_partner: companyLink,
-      is_domestic: isDomestic,
-      yearsOfExperienceRange: yearsOfExperienceRange,
-      salaryRange: salaryRange,
-      jobType: jobType,
-    };
-
     try {
-      const response = await axios.post(`${baseURL}jobs`, searchData, {
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await axios.get(`${baseURL}jobs/search-with-option`, {
+        params: {
+          ...searchOption,
+          type: searchOption.type.join(','),
+          min_salary: searchOption.min_salary * DEFAULT_SALARY_VALUE,
+          max_salary: searchOption.max_salary
+            ? searchOption.max_salary * DEFAULT_SALARY_VALUE
+            : undefined,
         },
       });
-      navigate('result', { state: { data: response.data } });
+      if (location.pathname === '/result') {
+        navigate('.', { state: { data: response.data } });
+      } else {
+        navigate('/result', { state: { data: response.data } });
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleFieldChange = (event) => {
-    setSelectedField(event.target.value);
+  const handleChangeField = (e) => {
+    if (e.target.value === DEFAULT_FIELD_VALUE) {
+      setSearchOption({
+        ...searchOption,
+        major: undefined,
+      });
+      setMajorsList(fieldData.flatMap((field) => field.majors));
+    } else {
+      setMajorsList(
+        fieldData.find((field) => field.name === e.target.value).majors,
+      );
+    }
+    setSearchOption({
+      ...searchOption,
+      field: e.target.value,
+    });
+    refMajorSelection.current.value = DEFAULT_FIELD_VALUE;
   };
 
-  const handleMajorChange = (event) => {
-    setSelectedMajor(event.target.value);
+  const handleChangeType = (e) => {
+    const type = e.target.value;
+    if (searchOption.type.includes(type)) {
+      setSearchOption({
+        ...searchOption,
+        type: searchOption.type.filter((item) => item !== type),
+      });
+    } else {
+      setSearchOption({ ...searchOption, type: [...searchOption.type, type] });
+    }
   };
 
-  const handleSelectMajor = () => {
-    const filterField = fieldData?.filter(
-      (field) => field.name === selectedField,
-    );
-    const majorsList = filterField[0]?.majors;
-    setMajorsList(majorsList);
+  const handleChangeCompany = (e) => {
+    const company = e.target.value;
+    setSearchOption({
+      ...searchOption,
+      company,
+    });
   };
 
-  useEffect(() => {
-    handleSelectMajor();
-  }, [selectedField]);
+  const handleChangeMajor = (e) => {
+    setSearchOption({
+      ...searchOption,
+      major:
+        e.target.value === DEFAULT_FIELD_VALUE ? undefined : e.target.value,
+    });
+  };
 
   return (
     <div>
@@ -106,12 +121,13 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
         onRequestClose={onRequestClose}
         style={{
           content: {
-            width: '66.666%',
-            margin: 'auto',
-            height: '50%',
+            width: '80%',
+            height: '54%',
             backgroundColor: 'white',
             borderRadius: '8px',
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)',
+            top: '20%',
+            left: '10%',
           },
           overlay: {
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -119,9 +135,10 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
         }}
         ariaHideApp={false}
       >
-        <div className="container">
-          <div className="row pt-2 pb-2">
-            <div className="col border-end pt-2 ">
+        <div>
+          {/* keyword, address */}
+          <div className="pb-4 px-2 w-100 d-flex align-items-center">
+            <div className="border-end px-2" style={{ width: '25%' }}>
               <div className="input-group">
                 <span
                   className="input-group-text"
@@ -135,12 +152,17 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                   placeholder="Công việc, từ khóa"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-default"
-                  value={jobKeyword}
-                  onChange={(e) => setJobKeyword(e.target.value)}
+                  value={searchOption.keyword}
+                  onChange={(e) =>
+                    setSearchOption({
+                      ...searchOption,
+                      keyword: e.target.value,
+                    })
+                  }
                 />
               </div>
             </div>
-            <div className="col border-end pt-2 ">
+            <div className="border-end px-2" style={{ width: '25%' }}>
               <div className="input-group">
                 <span
                   className="input-group-text"
@@ -157,26 +179,34 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                   placeholder="Vị trí"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-default"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
+                  value={searchOption.location}
+                  onChange={(e) =>
+                    setSearchOption({
+                      ...searchOption,
+                      location: e.target.value,
+                    })
+                  }
                 />
               </div>
             </div>
-            <div className="col border-end pt-2 ">
-              <div className="input-group ">
-                <div className="form-check d-flex align-items-center">
-                  <div className="container d-flex align-items-center me-4">
-                    <p className="mt-2">Doanh nghiệp liên kết</p>
-                  </div>
-                </div>
-                <div className="form-check mt-2">
+            <div
+              className="border-end d-flex align-items-center"
+              style={{ width: '25%' }}
+            >
+              <div className="d-flex align-items-center justify-content-center w-100 py-1">
+                <span>Doanh nghiệp liên kết</span>
+                <div className="ms-4">
                   <input
-                    className="form-check-input"
+                    className="form-check-input me-2"
                     type="checkbox"
-                    value=""
                     id="HUST_modal"
-                    checked={companyLink}
-                    onChange={(e) => setCompanyLink(e.target.checked)}
+                    onChange={(e) =>
+                      setSearchOption({
+                        ...searchOption,
+                        hust_partner: e.target.checked,
+                      })
+                    }
+                    checked={searchOption.hust_partner === true}
                   />
                   <label className="form-check-label" htmlFor="HUST_modal">
                     HUST
@@ -184,268 +214,252 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                 </div>
               </div>
             </div>
-            <div className="col pt-2 ">
-              <div className="d-flex">
-                <span className="ms-4 d-flex align-items-center">
-                  <span className="ms-2 me-2">Thêm</span>
-                  <i className="fas fa-chevron-up me-2" />
-                </span>
+            <div
+              className="d-flex justify-content-between"
+              style={{ width: '25%', marginLeft: 8 }}
+            >
+              <span
+                className="d-flex align-items-center"
+                style={{
+                  cursor: 'pointer',
+                }}
+                onClick={onRequestClose}
+              >
+                <span className="ms-2 me-2">Đóng</span>
+                <i className="fas fa-chevron-up me-2" />
+              </span>
+              <div className="d-flex ms-4">
                 <button
-                  type="button"
-                  className="btn btn-primary ms-auto"
-                  onClick={handleSearch}
+                  className="btn btn-secondary me-4"
+                  onClick={() => {
+                    resetConditions();
+                    refFieldSelection.current.value = DEFAULT_FIELD_VALUE;
+                    refMajorSelection.current.value = DEFAULT_FIELD_VALUE;
+                    setMajorsList(fieldData.flatMap((field) => field.majors));
+                  }}
+                >
+                  Đặt lại
+                </button>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    handleSearch();
+                    onRequestClose();
+                  }}
                 >
                   Tìm kiếm
                 </button>
               </div>
             </div>
           </div>
+          {/* search option */}
           <div className="row">
+            {/* year of experience, salary */}
             <div className="col-4 pt-4 border-top border-end ">
+              {/* year of experience */}
               <div className="wrapper">
                 <div className="wrapper-1">
                   <p>Số năm kinh nghiệm</p>
                 </div>
                 <div className="wrapper-1">
-                  <DoubleScrollBar
+                  <Slider
+                    value={[
+                      searchOption.min_years_of_experience,
+                      searchOption.max_years_of_experience
+                        ? searchOption.max_years_of_experience
+                        : 5,
+                    ]}
+                    step={1}
                     min={0}
                     max={5}
-                    step={1}
-                    forid="display1"
-                    class="SB-1"
-                    onChange={handleYearsOfExperienceChange}
-                    setYearsOfExperienceRange
+                    marks={[
+                      {
+                        value: 0,
+                        label: '0',
+                      },
+                      {
+                        value: 1,
+                        label: '1 ',
+                      },
+                      {
+                        value: 2,
+                        label: '2 ',
+                      },
+                      {
+                        value: 3,
+                        label: '3 ',
+                      },
+                      {
+                        value: 4,
+                        label: '4 ',
+                      },
+                      {
+                        value: 5,
+                        label: '4 +',
+                      },
+                    ]}
+                    onChange={(e) => {
+                      setSearchOption({
+                        ...searchOption,
+                        min_years_of_experience: e.target.value[0],
+                        max_years_of_experience:
+                          e.target.value[1] <= 4
+                            ? e.target.value[1]
+                            : undefined,
+                      });
+                    }}
                   />
                 </div>
-                <div className="row">
-                  <div className="horizontal-row p-2 ">
-                    {[0, 1, 2, 3, 4, 5].map((value) => (
-                      <div key={value} className="label">
-                        {value}
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
+              {/* salary */}
               <div className="wrapper">
                 <div className="wrapper-1">
                   <p>Lương (triệu VNĐ)</p>
                 </div>
                 <div className="wrapper-1">
-                  <DoubleScrollBar
+                  <Slider
+                    value={[
+                      searchOption.min_salary,
+                      searchOption.max_salary ? searchOption.max_salary : 50,
+                    ]}
+                    step={5}
+                    marks={[
+                      {
+                        value: 0,
+                        label: '0',
+                      },
+                      {
+                        value: 10,
+                        label: '10Tr',
+                      },
+                      {
+                        value: 20,
+                        label: '20Tr',
+                      },
+                      {
+                        value: 30,
+                        label: '30Tr',
+                      },
+                      {
+                        value: 40,
+                        label: '40Tr',
+                      },
+                      {
+                        value: 50,
+                        label: '> 40Tr',
+                      },
+                    ]}
                     min={0}
-                    max={40}
-                    step={10}
-                    forid="display2"
-                    class="SB-1"
-                    onChange={handleSalaryChange}
+                    max={50}
+                    onChange={(e) => {
+                      setSearchOption({
+                        ...searchOption,
+                        min_salary: e.target.value[0],
+                        max_salary:
+                          e.target.value[1] <= 40
+                            ? e.target.value[1]
+                            : undefined,
+                      });
+                    }}
                   />
-                </div>
-                <div className="row">
-                  <div className="horizontal-row p-2 ">
-                    {[0, 10, 20, 30, 40].map((value) => (
-                      <div key={value} className="label">
-                        {value >= 40 ? `30+` : value}
-                      </div>
-                    ))}
-                  </div>
                 </div>
               </div>
             </div>
+            {/* job type */}
             <div className="col pt-4 border-top border-end ">
               <div className="wrapper">
                 <div className="wrapper-1">
                   <p>Loại công việc</p>
                 </div>
-                <div className="wrapper-1">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id="tatCa"
-                      checked={checked.all}
-                      onChange={() => {
-                        if (checked.all) {
-                          setJobType((prev) =>
-                            prev.filter((type) => type !== 'Tất cả'),
-                          );
-                        } else {
-                          setJobType((prev) => [...prev, 'Tất cả']);
-                        }
-                        setChecked((prev) => ({
-                          ...prev,
-                          all: !prev.all,
-                        }));
-                      }}
-                    />
-                    <label className="form-check-label" htmlFor="tatCa">
-                      Tất cả
-                    </label>
-                  </div>
-                </div>
-                <div className="wrapper-1">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id="banthoigian"
-                      checked={checked.partTime}
-                      onChange={() => {
-                        if (checked.partTime) {
-                          setJobType((prev) =>
-                            prev.filter((type) => type !== 'Bán thời gian'),
-                          );
-                        } else {
-                          setJobType((prev) => [...prev, 'Bán thời gian']);
-                        }
-                        setChecked((prev) => ({
-                          ...prev,
-                          partTime: !prev.partTime,
-                        }));
-                      }}
-                    />
-                    <label className="form-check-label" htmlFor="banthoigian">
-                      Bán thời gian
-                    </label>
-                  </div>
-                </div>
-                <div className="wrapper-1">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id="toanthoigian"
-                      checked={checked.fullTime}
-                      onChange={() => {
-                        if (checked.fullTime) {
-                          setJobType((prev) =>
-                            prev.filter((type) => type !== 'Toàn thời gian'),
-                          );
-                        } else {
-                          setJobType((prev) => [...prev, 'Toàn thời gian']);
-                        }
-                        setChecked((prev) => ({
-                          ...prev,
-                          fullTime: !prev.fullTime,
-                        }));
-                      }}
-                    />
-                    <label className="form-check-label" htmlFor="toanthoigian">
-                      Toàn thời gian
-                    </label>
-                  </div>
-                </div>
-                <div className="wrapper-1">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id="thuctap"
-                      checked={checked.internship}
-                      onChange={() => {
-                        if (checked.internship) {
-                          setJobType((prev) =>
-                            prev.filter((type) => type !== 'Thực Tập'),
-                          );
-                        } else {
-                          setJobType((prev) => [...prev, 'Thực Tập']);
-                        }
-                        setChecked((prev) => ({
-                          ...prev,
-                          internship: !prev.internship,
-                        }));
-                      }}
-                    />
-                    <label className="form-check-label" htmlFor="thuctap">
-                      Thực tập
-                    </label>
-                  </div>
-                </div>
-                <div className="wrapper-1">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id="lamtuxa"
-                      checked={checked.remote}
-                      onChange={() => {
-                        if (checked.remote) {
-                          setJobType((prev) =>
-                            prev.filter((type) => type !== 'Làm từ xa'),
-                          );
-                        } else {
-                          setJobType((prev) => [...prev, 'Làm từ xa']);
-                        }
-                        setChecked((prev) => ({
-                          ...prev,
-                          remote: !prev.remote,
-                        }));
-                      }}
-                    />
-                    <label className="form-check-label" htmlFor="lamtuxa">
-                      Làm từ xa
-                    </label>
-                  </div>
-                </div>
+                <FormGroup>
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Bán thời gian"
+                    name="type"
+                    value={1}
+                    onChange={handleChangeType}
+                    checked={searchOption.type.includes('1')}
+                  />
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Toàn thời gian"
+                    name="type"
+                    value={2}
+                    onChange={handleChangeType}
+                    checked={searchOption.type.includes('2')}
+                  />
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Thực tập"
+                    name="type"
+                    value={3}
+                    onChange={handleChangeType}
+                    checked={searchOption.type.includes('3')}
+                  />
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Làm từ xa"
+                    name="type"
+                    value={4}
+                    onChange={handleChangeType}
+                    checked={searchOption.type.includes('4')}
+                  />
+                </FormGroup>
               </div>
             </div>
+            {/* company */}
             <div className="col pt-4 border-top border-end ">
-              <div className="wrapper">
-                <div className="wrapper-1">
-                  <p>Doanh nghiệp</p>
-                </div>
-                <div className="wrapper-1">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="vietnam"
-                      checked={isDomestic}
-                      onChange={() => setIsDomestic(true)}
+              <div className="wrapper mt-2">
+                <FormControl>
+                  <p className="mb-4">Doanh nghiệp</p>
+                  <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    name="radio-buttons-group"
+                    onChange={handleChangeCompany}
+                  >
+                    <FormControlLabel
+                      value="vietnam"
+                      control={<Radio />}
+                      label="Việt Nam"
+                      checked={searchOption.company === 'vietnam'}
                     />
-                    <label className="form-check-label" htmlFor="vietnam">
-                      Việt Nam
-                    </label>
-                  </div>
-                </div>
-                <div className="wrapper-1">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="nuocngoai"
-                      checked={!isDomestic}
-                      onChange={() => setIsDomestic(false)}
+                    <FormControlLabel
+                      value="nuocngoai"
+                      control={<Radio />}
+                      label="Nước ngoài"
+                      checked={searchOption.company === 'nuocngoai'}
                     />
-                    <label className="form-check-label" htmlFor="nuocngoai">
-                      Nước ngoài
-                    </label>
-                  </div>
-                </div>
+                  </RadioGroup>
+                </FormControl>
               </div>
             </div>
+            {/* field, major */}
             <div className="col pt-4 border-top ">
+              {/* field */}
               <div className="wrapper">
                 <div className="wrapper-1">
                   <p>Lĩnh vực</p>
                 </div>
                 <div className="wrapper-1">
                   <select
+                    ref={refFieldSelection}
                     className="form-select"
                     aria-label="Default select example"
-                    value={selectedField}
-                    onChange={handleFieldChange}
+                    onChange={handleChangeField}
+                    value={searchOption.field}
                   >
-                    {fieldData?.map((field, index) => (
-                      <option key={index} value={field.name}>
+                    <option selected value={DEFAULT_FIELD_VALUE}>
+                      Tất cả
+                    </option>
+                    {fieldData?.map((field) => (
+                      <option key={field.id} value={field.name}>
                         {field.name}
                       </option>
                     ))}
                   </select>
                 </div>
               </div>
+              {/* major */}
               <div className="wrapper">
                 <div className="wrapper-1">
                   <p>Chuyên ngành</p>
@@ -454,11 +468,15 @@ const SearchModal = ({ isOpen, onRequestClose, fieldData }) => {
                   <select
                     className="form-select"
                     aria-label="Default select example"
-                    value={selectedMajor}
-                    onChange={handleMajorChange}
+                    onChange={handleChangeMajor}
+                    ref={refMajorSelection}
+                    value={searchOption.major}
                   >
+                    <option selected value={DEFAULT_FIELD_VALUE}>
+                      Tất cả
+                    </option>
                     {majorsList?.map((major, index) => (
-                      <option key={index} value={major.name}>
+                      <option key={index} value={major.id}>
                         {major.name}
                       </option>
                     ))}

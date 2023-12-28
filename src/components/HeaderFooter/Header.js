@@ -1,45 +1,64 @@
 // Header.js
-import React, { useState } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import avatar from '../../assets/images/avt-hung.jpg';
+import { path } from '../../constants/path';
 import './styles.css';
-import { Link } from 'react-router-dom';
-
-const Header = ({ activeNav }) => {
+const Header = () => {
+  const location = useLocation();
   return (
     <header className="header">
       <nav className="header-nav">
         <div className="logo">
-          <a href="/" className="logobk logo-header">
+          <Link to="/" className="logobk logo-header">
             <i className="fa-solid fa-briefcase logo-icon "></i>
             <p className="text-logo">BKTimViec</p>
-          </a>
+          </Link>
         </div>
         <ul className="nav-list">
-          <a
-            href="/"
-            className={`nav-item ${activeNav === 0 ? 'item-sub' : ''}`}
+          <Link
+            to={path.home}
+            className={`nav-item ${
+              location.pathname === path.home ? 'item-sub' : ''
+            }`}
           >
-            <p className={`text-nav ${activeNav === 0 ? 'text-nav-sub' : ''}`}>
+            <p
+              className={`text-nav ${
+                location.pathname === path.home ? 'text-nav-sub' : ''
+              }`}
+            >
               Trang chủ
             </p>
-          </a>
-          <a
-            href=""
-            className={`nav-item item-2 ${activeNav === 1 ? 'item-sub' : ''}`}
+          </Link>
+          <Link
+            to={path.result}
+            className={`nav-item item-2 ${
+              location.pathname === path.result ? 'item-sub' : ''
+            }`}
           >
-            <p className={`text-nav ${activeNav === 1 ? 'text-nav-sub' : ''}`}>
+            <p
+              className={`text-nav ${
+                location.pathname === path.result ? 'text-nav-sub' : ''
+              }`}
+            >
               Tìm việc
             </p>
-          </a>
-          <a
-            href="/applied"
-            className={`nav-item ${activeNav === 2 ? 'item-sub' : ''}`}
+          </Link>
+          <Link
+            to={path.applied}
+            className={`nav-item ${
+              location.pathname === path.applied ? 'item-sub' : ''
+            }`}
           >
-            <p className={`text-nav ${activeNav === 2 ? 'text-nav-sub' : ''}`}>
+            <p
+              className={`text-nav ${
+                location.pathname === path.applied ? 'text-nav-sub' : ''
+              }`}
+            >
               Đã ứng tuyển
             </p>
-          </a>
+          </Link>
         </ul>
         <div className="user-avt">
           <img src={avatar} alt="avatar user" className="avt-img" />

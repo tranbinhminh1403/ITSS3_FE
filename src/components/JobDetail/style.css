@@ -1,0 +1,92 @@
+.job-detail_container {
+  width: 100%;
+  padding: 0 10%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.company-info_container {
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+.company-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.company-logo {
+  height: 100%;
+  margin-right: 12px;
+}
+.company-logo-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.company-name_container {
+  display: flex;
+  margin-bottom: 8px;
+}
+.company-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-right: 12px;
+}
+.company-name_container .job-type {
+  display: flex;
+  justify-content: center;
+  color: #0a65cc;
+  background-color: #e8f1ff;
+  border-radius: 52px;
+  height: 26px;
+  width: 116px;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 2px 8px;
+  margin-right: 12px;
+}
+.company-name_container .hust-partner {
+  color: #ff0000;
+  background-color: #f9dcdc;
+}
+
+.company-contact_container {
+  display: flex;
+  width: 100%;
+}
+.company-contact_item {
+  display: flex;
+  align-items: center;
+  margin-right: 14px;
+  color: #a6a6a6;
+}
+.company-contact_item_text {
+  margin-left: 8px;
+}
+
+.job-detail_apply_button {
+  width: 200px;
+  height: 44px;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0a65cc;
+  color: #ffffff;
+}
+.job-detail_expried {
+  margin-top: 12px;
+}
+
+.format-list-html li {
+  list-style: inside;
+  padding-top: 1rem;
+}
+
+.format-list-html ol,
+ul {
+  padding-left: 1rem;
+}

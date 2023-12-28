@@ -1,123 +1,130 @@
 .main-container {
-    position: relative;
-    top: 40px;
-    width: 81.5%;
-    margin-left: 92px;
-  }
-  
-  .job-list {
-    /* position: relative; */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    
-  }
-  
-  .job-list-item {
-    /* position: absolute; */
-    top: 0;
-    width: 98%;
-    height: 132px;
-    border: 2px solid #E4E5E8;
-    border-radius: 10px;
-    /* box-sizing: border-box; */
-    margin-bottom: 30px;
-    margin-left: 80px;  /* was 34px*/
-  }
-  
-  .avt-company-img {
-    height: 68px;
-    width:68px;
-    border-radius: 4px;
-  
-  }
-  
-  .job-detail {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 10px;
-    margin: 20px;
-  }
-  
-  .job-detail-left {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .job-type {
-    display: flex;
-    /* justify-content: space-around; */
-  }
-  
-  .job-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-left: 20px;
-  }
-  
-  .job-info-top {
-    display: flex;
-  }
-  
-  .job-info-bottom {
-    display: flex;
-    /* justify-content: space-between; */
-    width: 100%;
-  }
-  
-  .job-hust{
-    background-color: #F9DCDC;
-    border-radius: 52px;
-    height: 26px;
-    width: 116px;
-    text-align: center;
-    margin-left: 10px;
-    margin-right: 3px;
-  
-  }
-  
-  .job-txt-1 {
-    padding-top: 2px;
-    color: #FF0000;
-    font-size: 14px;
-    font-weight: 400;
-  }
-  
-  .job-fulltime {
-    background-color: #E8F1FF;
-    border-radius: 52px;
-    height: 26px;
-    width: 116px;
-    text-align: center;
-    margin-left: 3px;
-    margin-right: 3px;
-  
-  }
-  
-  .job-txt-2 {
-    padding-top: 2px;
-    color: #0A65CC;
-    font-size: 14px;
-    font-weight: 400;
-  }
-  
-  .btn-sub {
-    display: flex;
-    justify-content: space-around;
-    border-radius: 3px;
-    background-color: #E7F0FA;
-    width: 183px;
-    height: 48px;
-    text-align: center;
-    border: none;
-    padding-top: 12px;
-  }
-  
-  .btn-txt {
-    font-size: 16px;
-    color: #0A65CC;
-  }
-  
+  margin-top: 40px;
+  width: 100%;
+  padding: 0 10%;
+}
+.main-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.main-container ul li {
+  margin-left: 0;
+}
+
+.job-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.job-list-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  border: 2px solid #e4e5e8;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  padding: 0 20px;
+}
+
+.result-job-detail {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avt-company-img {
+  height: 48px;
+  width: 48px;
+  border-radius: 4px;
+}
+
+.job-detail-left {
+  display: flex;
+  justify-content: space-between;
+}
+
+.job-type {
+  display: flex;
+}
+
+.job-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+.job-info-top {
+  display: flex;
+}
+
+.job-info-bottom {
+  display: flex;
+  width: 100%;
+}
+
+.job-hust {
+  background-color: #f9dcdc;
+  border-radius: 52px;
+  height: 26px;
+  width: 116px;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 3px;
+}
+
+.job-txt-1 {
+  padding-top: 2px;
+  color: #ff0000;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.job-fulltime {
+  background-color: #e8f1ff;
+  border-radius: 52px;
+  height: 26px;
+  width: 116px;
+  text-align: center;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.job-txt-2 {
+  padding-top: 2px;
+  color: #0a65cc;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.result-btn-sub {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 3px;
+  background-color: #e7f0fa;
+  width: 144px;
+  border: none;
+  padding: 10px;
+}
+
+.btn-txt {
+  font-size: 16px;
+  color: #0a65cc;
+  margin: 0;
+}
+
+.notfound-container {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 100px;
+}

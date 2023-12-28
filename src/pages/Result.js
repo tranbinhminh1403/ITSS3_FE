@@ -1,18 +1,23 @@
-import Header from '../components/HeaderFooter/Header';
-import SearchBar from '../components/SearchBar/SearchBar';
-import Footer from '../components/HeaderFooter/Footer';
-import JobResult from '../components/JobResultItem/jobResult';
 import { useLocation } from 'react-router-dom';
-
+import JobResult from '../components/JobResultItem/jobResult';
+import ResultSkeletonLoading from '../components/Loading/ResultSkeletonLoading';
+import useFetchAllJobs from '../hooks/useFetchAllJobs';
+import SearchBarLayout from '../layouts/SearchBarLayout/SearchBarLayout';
 export default function Result() {
   const location = useLocation();
-  const { data } = location.state;
+  let data = [];
+  let loading = true;
+  if (location.state && location.state.data) {
+    data = location.state.data;
+    loading = false;
+  } else {
+    const { jobs, isLoading } = useFetchAllJobs();
+    data = jobs;
+    loading = isLoading;
+  }
   return (
-    <div>
-      <Header activeNav={1} />
-      <SearchBar />
-      <JobResult propData={data} />
-      <Footer marginTop={20} />
-    </div>
+    <SearchBarLayout>
+      {loading ? <ResultSkeletonLoading /> : <JobResult propData={data} />}
+    </SearchBarLayout>
   );
 }
