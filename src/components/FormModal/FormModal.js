@@ -12,7 +12,7 @@ import { baseURL } from '../../utils/baseUrl';
 
 const initValue =
   '<p><span>Chào [Tên Người Nhận],</span></p><p><span>Tôi là [Họ và Tên của Bạn], và tôi rất hứng thú với vị trí [Tên Vị Trí] mà công ty đang tuyển dụng, như đã được đăng tải trên trang web của bạn. Tôi tin rằng kinh nghiệm và kỹ năng của mình có thể làm cho tôi trở thành một người đóng góp có ý nghĩa cho đội ngũ của [Tên Công Ty].</span></p><p><span>Trân trọng,</span></p><p><span>[Họ và Tên của Bạn]</span></p><p><span>[Số Điện Thoại của Bạn]</span></p><p><span>[Địa chỉ Email của Bạn]</span></p>';
-const FormModal = ({ isOpen, onClose, propData }) => {
+const FormModal = ({ isOpen, onClose, propData, setIsApplied }) => {
   const { jobId, jobTitle, companyEmail } = propData;
   const [editorValue, setEditorValue] = useState(initValue);
   const [file, setFile] = useState(null);
@@ -63,6 +63,9 @@ const FormModal = ({ isOpen, onClose, propData }) => {
 
     if (file) {
       formData.append('file', file);
+    } else {
+      toast.error('Please upload your CV.');
+      return;
     }
     setIsSubmitting(true);
     axios
@@ -74,6 +77,7 @@ const FormModal = ({ isOpen, onClose, propData }) => {
       .then((response) => {
         closeModal();
         toast.success(`${response.data}`);
+        setIsApplied(true);
       })
       .catch((error) => {
         toast.error('Error submitting application.');
@@ -190,7 +194,7 @@ const FormModal = ({ isOpen, onClose, propData }) => {
           </button>
           <button
             className="btn btn-primary"
-            style={{ width: '15%', height: '40px' }}
+            style={{ minWidth: '15%', height: '40px' }}
             onClick={handleApply}
             disabled={isSubmitting}
           >

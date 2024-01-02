@@ -12,7 +12,9 @@ import { ReactComponent as UrlSVG } from './url.svg';
 const CompanyInfo = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const appliedJobs = useRecoilValue(appliedJobState);
-
+  const [isApplied, setIsApplied] = useState(() =>
+    appliedJobs.find((job) => job.jobId === data.id),
+  );
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -21,8 +23,6 @@ const CompanyInfo = ({ data }) => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-
-  const isApplied = appliedJobs.find((job) => job.id === data.id);
 
   const propData = {
     jobId: data.id,
@@ -104,6 +104,7 @@ const CompanyInfo = ({ data }) => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         propData={propData}
+        setIsApplied={setIsApplied}
       />
     </>
   );
