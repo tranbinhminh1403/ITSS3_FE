@@ -77,7 +77,9 @@ const JobCardDesc = ({ jobCardData }) => {
             <Box sx={{ color: '#767F8C', fontSize: 12, fontWeight: 400 }}>
               SỐ LƯỢNG TUYỂN:
             </Box>
-            <Box sx={{ fontWeight: 500, fontSize: 14 }}>14 June, 2021</Box>
+            <Box sx={{ fontWeight: 500, fontSize: 14 }}>
+              {Math.floor(Math.random() * 4) + 1} người
+            </Box>
           </Box>
         </Grid>
       </Grid>
@@ -132,7 +134,7 @@ const JobCardDesc = ({ jobCardData }) => {
             <Box sx={{ color: '#767F8C', fontSize: 12, fontWeight: 400 }}>
               HỌC VẤN:
             </Box>
-            <Box sx={{ fontWeight: 500, fontSize: 14 }}>14 June, 2021</Box>
+            <Box sx={{ fontWeight: 500, fontSize: 14 }}>Đại học</Box>
           </Box>
         </Grid>
       </Grid>
