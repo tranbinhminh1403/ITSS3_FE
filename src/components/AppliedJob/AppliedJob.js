@@ -148,7 +148,7 @@ const AppliedJob = ({ data }) => {
                     <CheckIcon></CheckIcon>Đã gửi CV
                   </td>
                   <td style={{ verticalAlign: 'middle' }}>
-                    <Link to={`/job/${jobItem.id}`}>
+                    <Link to={`/job/${jobItem.jobId}`}>
                       <button type="button" className="btn btn-primary">
                         Xem chi tiết
                       </button>
